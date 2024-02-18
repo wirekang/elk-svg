@@ -4,3 +4,4 @@ src
 .releaserc
 tsconfig.json
 package-lock.json
+jest.config.ts

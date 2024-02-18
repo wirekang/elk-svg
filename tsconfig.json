@@ -12,6 +12,10 @@
     "noImplicitThis": true,
     "alwaysStrict": true,
     "noImplicitOverride": true,
-    "skipLibCheck": true
-  }
+    "skipLibCheck": true,
+    "outDir": "dist",
+    "declaration": true,
+    "sourceMap": true
+  },
+  "include": ["src"]
 }
