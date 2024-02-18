@@ -1,0 +1,6 @@
+.github
+src
+.prettierrc
+.releaserc
+tsconfig.json
+package-lock.json
