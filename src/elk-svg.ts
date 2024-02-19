@@ -6,7 +6,7 @@ import { h } from "snabbdom";
 
 export class ElkSvg {
   private readonly domPatcher: DomPatcher;
-  private readonly viewBox = { x: 0, y: 0, w: 500, h: 500 };
+  private readonly viewBox = { x: 0, y: 0, w: 600, h: 600 };
 
   constructor(container: HTMLElement) {
     this.domPatcher = new DomPatcher(container);
