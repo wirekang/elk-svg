@@ -14,6 +14,7 @@ const graph: ElkNode = {
     "elk.layered.considerModelOrder.strategy": "PREFER_NODES",
     "elk.layered.nodePlacement.favorStraightEdges": "false",
     "elk.layered.spacing.nodeNodeBetweenLayers": "50",
+    "elk.layered.edgeRouting.splines.mode": "CONSERVATIVE",
   },
   children: [],
   edges: [],
@@ -107,7 +108,6 @@ window.addEventListener("keydown", (e) => {
 function viewbox(dx: number, dy: number) {
   const v = elkSvg.getViewBox();
   elkSvg.setViewBox(v.x + dx, v.y + dy, v.w, v.h);
-  render();
 }
 
 function rand(min: number, max: number) {
