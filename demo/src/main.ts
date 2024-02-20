@@ -2,6 +2,7 @@ import { ElkSvg } from "elk-svg";
 import ElkConstructor, { ElkNode } from "elkjs";
 import "./style.css";
 
+const elk = new ElkConstructor();
 let lastId = 0;
 
 const graph: ElkNode = {
@@ -67,7 +68,7 @@ function create() {
 create();
 
 async function render() {
-  const layouted = await new ElkConstructor().layout(graph);
+  const layouted = await elk.layout(graph);
   console.log(layouted);
   elkSvg.render(layouted, {
     root: { hidden: true },
@@ -82,7 +83,7 @@ render();
 const container = document.getElementById("container")!;
 
 const elkSvg = new ElkSvg(container);
-elkSvg.setViewBox(0, 0, 800, 800);
+elkSvg.getSvgContainer().setViewBox({ x: 0, y: 0, w: 800, h: 800 });
 
 window.addEventListener("keydown", (e) => {
   switch (e.key) {
@@ -106,8 +107,11 @@ window.addEventListener("keydown", (e) => {
 });
 
 function viewbox(dx: number, dy: number) {
-  const v = elkSvg.getViewBox();
-  elkSvg.setViewBox(v.x + dx, v.y + dy, v.w, v.h);
+  const v = elkSvg.getSvgContainer().getViewBox();
+  elkSvg
+    .getSvgContainer()
+    .setViewBox({ x: v.x + dx, y: v.y + dy, w: v.w, h: v.h });
+  render();
 }
 
 function rand(min: number, max: number) {
