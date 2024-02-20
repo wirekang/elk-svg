@@ -23,7 +23,6 @@
     "snabbdom": "^3.6.2"
   },
   "devDependencies": {
-    "elkjs": "^0.9.1",
     "prettier": "^3.2.5",
     "semantic-release": "^23.0.2",
     "typescript": "^5.3.3"

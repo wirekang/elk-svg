@@ -1,12 +1,12 @@
-import { ElkNode } from "elkjs";
 import { DomPatcher } from "./dom-patcher.js";
+import { SvgRenderer } from "./render/svg-renderer.js";
 import { SvgContainer } from "./svg-container.js";
-import { SvgRenderer } from "./svg-renderer.js";
-import { RenderPropsMap } from "./typings.js";
+import { ElkSvgNode } from "./typings.js";
 
 export class ElkSvg {
   private readonly domPatcher: DomPatcher;
   private readonly svgContainer = new SvgContainer();
+  private readonly svgRenderer = new SvgRenderer();
 
   constructor(container: HTMLElement) {
     this.domPatcher = new DomPatcher(container);
@@ -16,8 +16,8 @@ export class ElkSvg {
     return this.svgContainer;
   }
 
-  render(elkNode: ElkNode, propsMap: RenderPropsMap) {
-    const vNodes = new SvgRenderer(propsMap).render(elkNode);
+  render(node: ElkSvgNode) {
+    const vNodes = this.svgRenderer.render(node);
     this.domPatcher.patch(this.svgContainer.render(vNodes));
   }
 }
