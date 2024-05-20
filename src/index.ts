@@ -1,3 +1,3 @@
 export * from "./elk-types";
 export * from "./render";
-export * from "./dom";
+export * from "./utils";

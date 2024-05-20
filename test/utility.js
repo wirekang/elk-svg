@@ -1,5 +1,5 @@
 import jsdom from "jsdom";
-import { initRender } from "../dist";
+import { initRenderer } from "../dist";
 import prettier from "@prettier/sync";
 
 export function initDom() {
@@ -15,26 +15,33 @@ export function initDom() {
 /**
  *
  * @param {import("../dist").RenderProps} props
- * @param {(container:SVGElement,render:import("../dist").Render)=>void} cb
+ * @param {(renderer:import("../dist").Renderer,container:SVGElement)=>void} cb
  */
 export function testRender(props, cb) {
   const dom = initDom();
   const container = dom.window.document.getElementById("container");
-  const render = initRender({
+  const renderer = initRenderer({
     container,
     document: dom.window.document,
     ...props,
   });
   try {
-    cb(container, render);
+    cb(renderer, container);
   } catch (e) {
     const d = prettier.format(dom.serialize(), {
       printWidth: 80,
       parser: "html",
     });
-    e.message = e.message + "\n" + d;
+    console.log("=====================DOM:\n", d, "\n\n");
     throw e;
   }
+}
+
+export function testSingleRender(props, node, options, cb) {
+  return testRender(props, (r) => {
+    r.render(node, options);
+    cb(r.groupRef);
+  });
 }
 
 /**
@@ -51,10 +58,14 @@ export function expectAtrrs(e, attrs) {
 /**
  *
  * @param {Element} e
- * @param {string} classes
+ * @param {string[]} classes
  */
-export function expectClasses(e, classes) {
-  classes.split(" ").forEach((c) => {
-    expect(Array.from(e.classList.values())).toContain(c);
+export function expectClasses(e, classes, equal) {
+  const actualClasses = Array.from(e.classList.values());
+  classes.forEach((c) => {
+    expect(actualClasses).toContain(c);
   });
+  if (equal) {
+    expect(actualClasses.sort()).toEqual(classes.sort());
+  }
 }

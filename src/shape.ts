@@ -1,4 +1,4 @@
-import { n } from "./dom";
+import { n } from "./utils";
 
 export type Shapes = Record<string, ShapeFunc>;
 

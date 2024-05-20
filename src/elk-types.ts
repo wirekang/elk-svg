@@ -3,16 +3,14 @@ export type LayoutOptions = Record<string, string>;
 export type ElkPoint = { x: number; y: number };
 
 export type ElkGraphElement = {
+  id?: string;
   labels?: ElkLabel[];
   layoutOptions?: LayoutOptions;
 };
 
-export type ElkLabel = Omit<
-  ElkShape & {
-    text?: string;
-  },
-  "id" | "labels"
->;
+export type ElkLabel = ElkShape & {
+  text?: string;
+};
 
 export type ElkShape = ElkGraphElement & {
   x?: number;
