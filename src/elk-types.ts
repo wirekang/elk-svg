@@ -1,4 +1,4 @@
-export type LayoutOptions = Record<string, string>;
+export type LayoutOptions = Record<string, any>;
 
 export type ElkPoint = { x: number; y: number };
 
