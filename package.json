@@ -2,7 +2,8 @@
   "name": "elk-svg",
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "npm run clean && tsc"
+    "build": "npm run clean && tsc",
+    "test": ""
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
