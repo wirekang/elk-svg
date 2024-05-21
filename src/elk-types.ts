@@ -1,11 +1,8 @@
-export type LayoutOptions = Record<string, any>;
-
 export type ElkPoint = { x: number; y: number };
 
 export type ElkGraphElement = {
   id?: string;
   labels?: ElkLabel[];
-  layoutOptions?: LayoutOptions;
 };
 
 export type ElkLabel = ElkShape & {
@@ -34,6 +31,7 @@ export type ElkEdge = ElkGraphElement & {
   sources: string[];
   targets: string[];
   sections?: ElkEdgeSection[];
+  container?: string;
 };
 
 export type ElkEdgeSection = ElkGraphElement & {
@@ -45,4 +43,17 @@ export type ElkEdgeSection = ElkGraphElement & {
   outgoingShape?: string;
   incomingSections?: string[];
   outgoingSections?: string[];
+};
+
+export type LayoutedElkNode = ElkNode & {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  children?: LayoutedElkNode[];
+  edges?: LayoutedElkEdge[];
+};
+
+export type LayoutedElkEdge = ElkEdge & {
+  container: string;
 };
