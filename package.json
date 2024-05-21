@@ -1,14 +1,19 @@
 {
   "name": "elk-svg",
-  "version": "1.0.0",
-  "description": "",
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "tsc",
+    "build": "npm run clean && tsc",
     "test": ""
   },
   "main": "dist/index.js",
-  "types": "dist/index.ts",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "jest": {
+    "transform": {}
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wirekang/elk-svg.git"
@@ -19,13 +24,9 @@
     "url": "https://github.com/wirekang/elk-svg/issues"
   },
   "homepage": "https://github.com/wirekang/elk-svg#readme",
-  "dependencies": {
-    "snabbdom": "^3.6.2"
-  },
   "devDependencies": {
-    "elkjs": "^0.9.1",
     "prettier": "^3.2.5",
     "semantic-release": "^23.0.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.5"
   }
 }

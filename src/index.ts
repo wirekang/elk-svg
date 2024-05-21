@@ -1,2 +1,2 @@
-export * from "./elk-svg.js";
-export * from "./typings.js";
+export * from "./elk-svg";
+export * from "./types";

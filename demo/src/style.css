@@ -1,8 +1,29 @@
 #container {
-  width: 900px;
-  height: 900px;
-  border: 1px solid red;
+  width: 4000px;
+  height: 4000px;
+  border: 1px solid black;
 }
-* {
-  transition: all 0.1s;
+
+#container * {
+  transition: all 0.5s ease;
+}
+
+.elk-svg-node-shape {
+  fill: none;
+  stroke: red;
+}
+
+.elk-svg-label-component {
+  dominant-baseline: hanging;
+}
+
+.elk-svg-edge-component {
+  fill: none;
+  stroke: black;
+  stroke-width: 1px;
+}
+
+.description > span {
+  border-right: 1px solid black;
+  padding: 0 5px;
 }
