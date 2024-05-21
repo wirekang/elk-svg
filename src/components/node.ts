@@ -4,12 +4,7 @@ import type { Component } from "./types";
 export const nodeComponent: Component<ElkNode> = {
   name: "node",
   validate: (ee: any) => {
-    return (
-      ee.width !== undefined &&
-      ee.height !== undefined &&
-      ee.x !== undefined &&
-      ee.y !== undefined
-    );
+    return ee.width !== undefined && ee.height !== undefined;
   },
 
   key: (ee, data): string => {

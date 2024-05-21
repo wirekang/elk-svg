@@ -9,6 +9,7 @@ import { defaultLogger, type Logger } from "./logger";
 import { nodeComponent } from "./components/node";
 import { edgeComponent } from "./components/edge";
 import { labelComponent } from "./components/label";
+import { portComponent } from "./components/port";
 
 export type ElkSvgOptions = {
   container: Element;
@@ -87,6 +88,18 @@ export class ElkSvg {
         });
       });
 
+      node.ports?.forEach((port) => {
+        this.renderContxt.parent = g;
+        this.renderContxt.parentId = node.id;
+        const portG = this.renderElkElement(portComponent, port);
+
+        port.labels?.forEach((label) => {
+          this.renderContxt.parent = portG;
+          this.renderContxt.parentId = port.id;
+          this.renderElkElement(labelComponent, label);
+        });
+      });
+
       node.labels?.forEach((label) => {
         this.renderContxt.parent = g;
         this.renderContxt.parentId = node.id;
@@ -133,6 +146,7 @@ export class ElkSvg {
     if (!id) {
       const de = svg("g");
       this.volatileElements.push(de);
+      this.renderContxt.parent.appendChild(de);
       return de;
     }
 

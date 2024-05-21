@@ -1,17 +1,23 @@
-import type { ElkLabel, ElkNode } from "../elk-types";
+import type { ElkLabel } from "../elk-types";
+import { svg } from "../utils";
 import type { Component } from "./types";
 
 export const labelComponent: Component<ElkLabel> = {
   name: "label",
   validate: (ee: any) => {
-    return ee.text !== undefined;
+    return true;
   },
 
   key: (ee, data) => {
-    return "";
+    return "_";
   },
 
-  render: (ee, data) => {
-    return null;
+  render: (ctx, ee, data) => {
+    if (ee.text === undefined) {
+      return null;
+    }
+    const t = svg("text");
+    t.textContent = ee.text;
+    return t;
   },
 };

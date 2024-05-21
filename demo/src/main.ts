@@ -4,13 +4,13 @@ import { ElkSvg } from "elk-svg";
 import { exampleNodes } from "./data";
 
 async function go(node: ElkNode) {
-  console.log(node);
   const container = document.getElementById("container")!;
   container.innerHTML = "";
   const elkSvg = new ElkSvg({ container, defaultRenderData: { nodeShape: "rect" } });
   const elk = new ELK();
   (window as any).node = node;
   await elk.layout(node);
+  console.log(node);
   elkSvg.render(node, { root: {} });
 }
 
