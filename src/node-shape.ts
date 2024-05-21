@@ -1,12 +1,10 @@
-import type { LayoutedElkNode } from "./elk-types";
+import type { NodeShapeFunction } from "./types";
 import { svg } from "./utils";
-
-export type NodeShapeFunction = (node: LayoutedElkNode) => Element;
 
 const rect: NodeShapeFunction = (node) => {
   const r = svg("rect");
-  r.setAttribute("width", node.width.toString());
-  r.setAttribute("height", node.height.toString());
+  r.setAttribute("width", node.width!.toString());
+  r.setAttribute("height", node.height!.toString());
   return r;
 };
 

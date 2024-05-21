@@ -1,25 +1,26 @@
-import type { ElkNode, LayoutedElkNode } from "../elk-types";
+import type { ElkSvgNode } from "../types";
 import type { Component } from "./types";
 
-export const nodeComponent: Component<ElkNode> = {
+export const nodeComponent: Component<ElkSvgNode> = {
   name: "node",
   validate: (ee: any) => {
     return ee.width !== undefined && ee.height !== undefined;
   },
 
-  key: (ee, data): string => {
-    return `${data.nodeShape}`;
+  key: (ee): string => {
+    return `${ee.svg?.shape}`;
   },
 
-  render: (ctx, ee, data) => {
-    if (data.nodeShape === undefined) {
+  render: (ctx, ee) => {
+    const shape = ee.svg?.shape;
+    if (shape === undefined) {
       return null;
     }
-    const f = ctx.nodeShapeFunctions[data.nodeShape];
+    const f = ctx.nodeShapeFunctions[shape];
     if (!f) {
-      ctx.logger.error(`no nodeShapeFunction for '${data.nodeShape}'`);
+      ctx.logger.error(`no nodeShapeFunction for '${shape}'`);
       return null;
     }
-    return f(ee as LayoutedElkNode);
+    return f(ee as any);
   },
 };

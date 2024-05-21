@@ -6,12 +6,12 @@ import { exampleNodes } from "./data";
 async function go(node: ElkNode) {
   const container = document.getElementById("container")!;
   container.innerHTML = "";
-  const elkSvg = new ElkSvg({ container, defaultRenderData: { nodeShape: "rect" } });
+  const elkSvg = new ElkSvg({ container, defaultOptions: { node: { shape: "rect" } } });
   const elk = new ELK();
   (window as any).node = node;
   await elk.layout(node);
   console.log(node);
-  elkSvg.render(node, { root: {} });
+  elkSvg.render(node);
 }
 
 let i = 1;

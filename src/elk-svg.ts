@@ -1,37 +1,29 @@
-import { ATTRNAMES, CLASSNAMES, type Attrnames, type Classnames } from "./names";
-import type { Component, ComponentRenderContext, RenderData } from "./components/types";
+import { defaultAttrnames, defaultClassnames, defaultLogger } from "./defaults";
 import { ElementRegistry } from "./element-registry";
-import type { ElkGraphElement, ElkNode } from "./elk-types";
-import { NODE_SHAPE_FUNCTIONS, type NodeShapeFunction } from "./node-shape";
+import { NODE_SHAPE_FUNCTIONS } from "./node-shape";
 import { freezeMerge, svg, transform } from "./utils";
 import { Check, Checker } from "./checker";
-import { defaultLogger, type Logger } from "./logger";
 import { nodeComponent } from "./components/node";
 import { edgeComponent } from "./components/edge";
 import { labelComponent } from "./components/label";
 import { portComponent } from "./components/port";
-
-export type ElkSvgOptions = {
-  container: Element;
-  nodeShapeFunctions?: Record<string, NodeShapeFunction>;
-  classnames?: Classnames;
-  attrnames?: Attrnames;
-  logger?: Logger;
-
-  /**
-   * `defaultRenderData` is used if there is no `RenderData` for given id.
-   */
-  defaultRenderData?: RenderData;
-};
-
-export type ElkSvgRenderData = Record<string, RenderData>;
+import type {
+  ElkSvgElement,
+  ElkSvgNode,
+  Attrnames,
+  Classnames,
+  ElkSvgOptions,
+  Logger,
+  NodeShapeFunction,
+} from "./types";
+import type { Component, ComponentRenderContext } from "./components/types";
 
 export class ElkSvg {
   private readonly logger: Logger;
   private readonly nodeShapeFunctions: Record<string, NodeShapeFunction>;
   private readonly classnames: Classnames;
   private readonly attrnames: Attrnames;
-  private readonly defaultRenderData: RenderData;
+  private readonly defaultOptions: Record<string, any>;
 
   private readonly groupRegistry = new ElementRegistry("group");
   private readonly componentRegistry = new ElementRegistry("component");
@@ -45,7 +37,6 @@ export class ElkSvg {
     deletionEl: null as any as ElementRegistry,
     parent: null as any as Element,
     parentId: null as string | null,
-    d: {} as ElkSvgRenderData,
   };
 
   constructor(options: ElkSvgOptions) {
@@ -53,23 +44,28 @@ export class ElkSvg {
       NODE_SHAPE_FUNCTIONS,
       options.nodeShapeFunctions,
     );
-    this.classnames = freezeMerge(CLASSNAMES, options.classnames);
-    this.attrnames = freezeMerge(ATTRNAMES, options.attrnames);
+    this.classnames = freezeMerge(defaultClassnames, options.classnames);
+    this.attrnames = freezeMerge(defaultAttrnames, options.attrnames);
     this.logger = options.logger ?? defaultLogger;
-    this.defaultRenderData = freezeMerge(options.defaultRenderData);
+    this.defaultOptions = Object.freeze({
+      node: freezeMerge(options.defaultOptions?.node),
+      edge: freezeMerge(options.defaultOptions?.edge),
+      port: freezeMerge(options.defaultOptions?.port),
+      label: freezeMerge(options.defaultOptions?.label),
+    });
+
     this.topLevelGroup = svg("g");
     this.topLevelGroup.classList.add(this.classnames.topLevelGroup);
     options.container.appendChild(this.topLevelGroup);
   }
 
-  render(rootNode: ElkNode, d: ElkSvgRenderData) {
+  render(rootNode: ElkSvgNode) {
     this.cleanVolatileElements();
 
     this.renderContxt.parent = this.topLevelGroup;
     this.renderContxt.parentId = null;
     this.renderContxt.deletionEl = this.groupRegistry.clone("deletion");
-    this.renderContxt.d = d;
-    const cb = (node: ElkNode) => {
+    const cb = (node: ElkSvgNode) => {
       const g = this.renderElkElement(nodeComponent, node);
 
       node.children?.forEach((v) => {
@@ -123,7 +119,7 @@ export class ElkSvg {
     this.renderContxt.deletionEl.deleteAll();
   }
 
-  private renderElkElement(component: Component, ee: ElkGraphElement) {
+  private renderElkElement(component: Component, ee: ElkSvgElement) {
     if (ee.id) {
       this.renderContxt.deletionEl.unset(ee.id);
     }
@@ -141,7 +137,7 @@ export class ElkSvg {
     return gde;
   }
 
-  private renderGroup(ee: ElkGraphElement): SVGGElement {
+  private renderGroup(ee: ElkSvgElement): SVGGElement {
     const id = ee.id;
     if (!id) {
       const de = svg("g");
@@ -172,13 +168,13 @@ export class ElkSvg {
 
   private renderComponent(
     component: Component,
-    ee: ElkGraphElement,
+    ee: ElkSvgElement,
     gde: Element,
   ): Element | null {
     const id = ee.id;
-    const data = this.getData(ee);
+    this.setDefaultOptions(ee, component.name);
 
-    if (!component.validate(ee, data)) {
+    if (!component.validate(ee)) {
       this.logger.error(`validation failed: ${component.name}(${id})`);
       return null;
     }
@@ -188,7 +184,7 @@ export class ElkSvg {
     };
 
     if (!id) {
-      const de = component.render(ctx, ee, data);
+      const de = component.render(ctx, ee);
       if (!de) {
         return null;
       }
@@ -196,12 +192,12 @@ export class ElkSvg {
       return de;
     }
 
-    const keyCheck = this.keyChecker.check(id, component.key(ee, data));
+    const keyCheck = this.keyChecker.check(id, component.key(ee));
     switch (keyCheck) {
       case Check.changed:
         this.componentRegistry.delete(id);
       case Check.new:
-        const de = component.render(ctx, ee, data);
+        const de = component.render(ctx, ee);
         if (!de) {
           return null;
         }
@@ -214,10 +210,7 @@ export class ElkSvg {
     throw new Error("unreachable");
   }
 
-  private getData(e: { id?: string }) {
-    if (!e.id || this.renderContxt.d[e.id] === undefined) {
-      return { ...this.defaultRenderData };
-    }
-    return { ...this.renderContxt.d[e.id] };
+  private setDefaultOptions(e: { svg?: any }, name: string) {
+    e.svg = freezeMerge(this.defaultOptions[name], e.svg);
   }
 }
