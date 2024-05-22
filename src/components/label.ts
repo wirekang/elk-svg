@@ -9,7 +9,7 @@ export const labelComponent: Component<ElkSvgLabel> = {
   },
 
   key: (ee) => {
-    return "_";
+    return `${ee.text}`;
   },
 
   render: (ctx, ee) => {

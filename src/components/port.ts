@@ -9,7 +9,7 @@ export const portComponent: Component<ElkSvgPort> = {
   },
 
   key: (ee): string => {
-    return "_";
+    return `${ee.width}${ee.height}`;
   },
 
   render: (ctx, ee) => {

@@ -8,7 +8,7 @@ export const nodeComponent: Component<ElkSvgNode> = {
   },
 
   key: (ee): string => {
-    return `${ee.svg?.shape}`;
+    return `${ee.svg?.shape}${ee.svg?.radius}${ee.width}${ee.height}`;
   },
 
   render: (ctx, ee) => {

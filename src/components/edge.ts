@@ -1,4 +1,4 @@
-import type { EdgeArrowFunction, ElkSvgEdge } from "../types";
+import type { EdgeArrowFunction, ElkSvgEdge, ElkSvgEdgeSection, Point } from "../types";
 import { svg, transform } from "../utils";
 import type { Component } from "./types";
 
@@ -9,7 +9,7 @@ export const edgeComponent: Component<ElkSvgEdge> = {
   },
 
   key: (ee): string => {
-    return "_";
+    return `${ee.container}${ee.sections!.map(sectionKey).join("")}`;
   },
 
   render: (ctx, ee) => {
@@ -66,4 +66,19 @@ function getArrowFunction(ctx: any, ee: any): EdgeArrowFunction | null {
     return null;
   }
   return arrowFunction;
+}
+
+function sectionKey(v: ElkSvgEdgeSection) {
+  return pointKey(v.startPoint) + pointKey(v.endPoint) + pointsKey(v.bendPoints);
+}
+
+function pointsKey(v: Point[] | undefined) {
+  if (!v) {
+    return "";
+  }
+  return v.map(pointKey).join("");
+}
+
+function pointKey(v: Point) {
+  return `${v.x}${v.y}`;
 }
