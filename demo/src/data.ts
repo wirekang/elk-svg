@@ -1,6 +1,312 @@
 export const exampleNodes: any = [
   {
     id: "root",
+    children: [
+      {
+        id: "1",
+        svg: {
+          shape: "rect",
+        },
+        labels: [
+          {
+            id: "label1",
+            text: "1 Start",
+          },
+        ],
+      },
+      {
+        id: "2",
+        svg: {
+          shape: "rect",
+        },
+        labels: [
+          {
+            id: "label2",
+            text: "2 Input password",
+          },
+        ],
+      },
+      {
+        id: "3",
+        svg: {
+          shape: "rect",
+        },
+        labels: [
+          {
+            id: "label3",
+            text: "3 Create a pass_length variable that is equal to 0",
+          },
+        ],
+      },
+      {
+        id: "4",
+        svg: {
+          shape: "rect",
+          classes: ["focus"],
+        },
+        labels: [
+          {
+            id: "label4",
+            text: "4 Create a contains_number variable that is set to False",
+          },
+        ],
+      },
+      {
+        id: "5",
+        svg: {
+          shape: "diamond",
+        },
+        labels: [
+          {
+            id: "label5",
+            text: "5 Has the entire password been searched?",
+          },
+        ],
+      },
+      {
+        id: "6",
+        svg: {
+          shape: "rect",
+        },
+        labels: [
+          {
+            id: "label6",
+            text: "6 Iterate to the next character in password",
+          },
+        ],
+      },
+      {
+        id: "7",
+        svg: {
+          shape: "rect",
+        },
+        labels: [
+          {
+            id: "label7",
+            text: "7 Increase pass_length",
+          },
+        ],
+      },
+      {
+        id: "8",
+        svg: {
+          shape: "diamond",
+        },
+        labels: [
+          {
+            id: "label8",
+            text: "8 Is the current character a number?",
+          },
+        ],
+      },
+      {
+        id: "9",
+        svg: {
+          shape: "rect",
+        },
+        labels: [
+          {
+            id: "label9",
+            text: "9 Set contains_number to True",
+          },
+        ],
+      },
+      {
+        id: "10",
+        svg: {
+          shape: "diamond",
+        },
+        labels: [
+          {
+            id: "label10",
+            text: "10 Is pass_length greater than 8 and is contain_number equal to True?",
+          },
+        ],
+      },
+      {
+        id: "11",
+        svg: {
+          shape: "rect",
+        },
+        labels: [
+          {
+            id: "label11",
+            text: "11 Invalid password",
+          },
+        ],
+      },
+      {
+        id: "12",
+        svg: {
+          shape: "rect",
+        },
+        labels: [
+          {
+            id: "label12",
+            text: "12 Valid password",
+          },
+        ],
+      },
+    ],
+    edges: [
+      {
+        id: "20",
+        sources: ["1"],
+        targets: ["2"],
+        svg: {
+          arrow: "normal",
+          arrowSize: 10,
+        },
+      },
+      {
+        id: "21",
+        sources: ["2"],
+        targets: ["3"],
+        svg: {
+          arrow: "normal",
+          arrowSize: 10,
+        },
+      },
+      {
+        id: "22",
+        sources: ["3"],
+        targets: ["4"],
+        svg: {
+          arrow: "normal",
+          arrowSize: 10,
+        },
+      },
+      {
+        id: "23",
+        sources: ["4"],
+        targets: ["5"],
+        svg: {
+          arrow: "normal",
+          arrowSize: 10,
+        },
+      },
+      {
+        id: "24",
+        sources: ["5"],
+        targets: ["6"],
+        svg: {
+          arrow: "normal",
+          arrowSize: 10,
+        },
+        labels: [
+          {
+            id: "label24",
+            text: "No",
+          },
+        ],
+      },
+      {
+        id: "25",
+        sources: ["6"],
+        targets: ["7"],
+        svg: {
+          arrow: "normal",
+          arrowSize: 10,
+        },
+      },
+      {
+        id: "26",
+        sources: ["7"],
+        targets: ["8"],
+        svg: {
+          arrow: "normal",
+          arrowSize: 10,
+        },
+      },
+      {
+        id: "27",
+        sources: ["8"],
+        targets: ["9"],
+        svg: {
+          arrow: "normal",
+          arrowSize: 10,
+        },
+      },
+      {
+        id: "97",
+        sources: ["5"],
+        targets: ["10"],
+        svg: {
+          arrow: "normal",
+          arrowSize: 10,
+        },
+        labels: [
+          {
+            id: "label97",
+            text: "Yes",
+          },
+        ],
+      },
+      {
+        id: "28",
+        sources: ["8"],
+        targets: ["5"],
+        svg: {
+          arrow: "normal",
+          arrowSize: 10,
+        },
+        labels: [
+          {
+            id: "label28",
+            text: "No",
+          },
+        ],
+      },
+      {
+        id: "29",
+        sources: ["9"],
+        targets: ["5"],
+        svg: {
+          arrow: "normal",
+          arrowSize: 10,
+        },
+        labels: [
+          {
+            id: "label29",
+            text: "Yes",
+          },
+        ],
+      },
+      {
+        id: "90",
+        sources: ["10"],
+        targets: ["11"],
+        svg: {
+          arrow: "normal",
+          arrowSize: 10,
+        },
+        labels: [
+          {
+            id: "label90",
+            text: "No",
+          },
+        ],
+      },
+      {
+        id: "91",
+        sources: ["10"],
+        targets: ["12"],
+        svg: {
+          arrow: "normal",
+          arrowSize: 10,
+        },
+        labels: [
+          {
+            id: "label91",
+            text: "Yes",
+          },
+        ],
+      },
+    ],
+    svg: {},
+  },
+  {
+    id: "root",
     layoutoptions: { algorithm: "layered" },
     children: [
       {

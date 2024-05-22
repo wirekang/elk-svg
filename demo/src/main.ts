@@ -14,10 +14,10 @@ async function go(node: ElkNode) {
   (window as any).node = node;
   await elk.layout(node);
   console.log(node);
-  elkSvg.render(node);
+  elkSvg.render(structuredClone(node));
   elkSvg.render(node);
   setTimeout(() => {
-    elkSvg.render(node);
+    elkSvg.render(structuredClone(node));
   }, 1000);
 }
 
