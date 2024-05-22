@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    "lib": ["DOM", "DOM.Iterable", "ES2017"],
-    "module": "ES2015",
+    "target": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ES2017", "ESNext"],
+    "module": "ESNext",
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
