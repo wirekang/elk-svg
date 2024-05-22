@@ -4,9 +4,9 @@
 # [elk-svg](https://github.com/wirekang/elk-svg)
 
 
-* **Lightweight**: elk-svg is a zero-dependency library renders [ELK json format](https://eclipse.dev/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html) into SVG.
+**Lightweight**: elk-svg is a zero-dependency library renders [ELK json format](https://eclipse.dev/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html) into SVG.
 
-* **Customizable**: There is no additional abstraction layer. You can do whatever if SVG supports it.
+**Customizable**: There is no additional abstraction layer. You can do whatever if SVG supports it.
 `elk-svg` manages internal state and modifies DOM only if necessary: it means CSS animation will works well.
 
 
