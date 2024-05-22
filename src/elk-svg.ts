@@ -147,7 +147,7 @@ export class ElkSvg {
     if (ee2.id) {
       this.renderContxt.groupRegistryForDeletion.delete(ee2.id);
     }
-    const gde = this.renderGroup(ee2.id);
+    const gde = this.renderGroup(ee2.id, component.append);
     const cn = component.name as "node" | "edge" | "port" | "label";
     gde.setAttribute(
       "class",
@@ -164,11 +164,15 @@ export class ElkSvg {
     return gde;
   }
 
-  private renderGroup(id: string | undefined): SVGGElement {
+  private renderGroup(id: string | undefined, append?: boolean): SVGGElement {
     if (!id) {
       const de = svg("g");
       this.volatileElements.push(de);
-      this.renderContxt.parent.appendChild(de);
+      if (append) {
+        this.renderContxt.parent.append(de);
+      } else {
+        this.renderContxt.parent.prepend(de);
+      }
       return de;
     }
 
@@ -183,7 +187,11 @@ export class ElkSvg {
       switch (parentIdCheck) {
         case Check.new:
         case Check.changed:
-          this.renderContxt.parent.appendChild(existing);
+          if (append) {
+            this.renderContxt.parent.append(existing);
+          } else {
+            this.renderContxt.parent.prepend(existing);
+          }
           break;
         case Check.unchanged:
       }
@@ -191,7 +199,11 @@ export class ElkSvg {
     }
 
     const de = svg("g");
-    this.renderContxt.parent.appendChild(de);
+    if (append) {
+      this.renderContxt.parent.append(de);
+    } else {
+      this.renderContxt.parent.prepend(de);
+    }
     this.groupRegistry.set(id, de);
     this.keyChecker.reset(id);
     return de;
@@ -220,7 +232,11 @@ export class ElkSvg {
       if (!de) {
         return null;
       }
-      gde.appendChild(de);
+      if (component.append) {
+        gde.append(de);
+      } else {
+        gde.prepend(de);
+      }
       return de;
     }
 
@@ -234,7 +250,11 @@ export class ElkSvg {
           return null;
         }
         this.componentRegistry.set(id, de);
-        gde.appendChild(de);
+        if (component.append) {
+          gde.append(de);
+        } else {
+          gde.prepend(de);
+        }
         return de;
       case Check.unchanged:
         return this.componentRegistry.getOrNull(id);
