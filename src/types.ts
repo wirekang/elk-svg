@@ -12,7 +12,7 @@ export type ElkSvgOptions = {
   nodeShapeFunctions?: Record<string, NodeShapeFunction>;
   edgeArrowFunctions?: Record<string, EdgeArrowFunction>;
 
-  classnames?: Classnames;
+  classnames?: Partial<Classnames>;
   logger?: Logger;
   defaultOptions?: {
     node?: ElkSvgNodeOptions;

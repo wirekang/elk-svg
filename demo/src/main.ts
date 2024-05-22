@@ -15,6 +15,10 @@ async function go(node: ElkNode) {
   await elk.layout(node);
   console.log(node);
   elkSvg.render(node);
+  elkSvg.render(node);
+  setTimeout(() => {
+    elkSvg.render(node);
+  }, 1000);
 }
 
 let i = 1;
