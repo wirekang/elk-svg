@@ -1,3 +1,5 @@
+import type { ComponentRenderContext } from "./components/types";
+
 export type ElkSvgOptions = {
   /**
    * `svg` DOM Element.
@@ -9,6 +11,8 @@ export type ElkSvgOptions = {
    * @see {@link NodeShapeFunction}
    */
   nodeShapeFunctions?: Record<string, NodeShapeFunction>;
+
+  edgeArrowFunctions?: Record<string, EdgeArrowFunction>;
 
   /**
    * to override default classes.
@@ -32,10 +36,13 @@ export type ElkSvgOptions = {
   };
 };
 
-export type NodeShapeFunction = (
-  node: ElkSvgNode & { width: number; height: number },
-  logger: Logger,
-) => Element;
+export type RenderFunction<T> = (ctx: ComponentRenderContext, ee: T) => Element;
+
+export type NodeShapeFunction = RenderFunction<
+  ElkSvgNode & { width: number; height: number }
+>;
+
+export type EdgeArrowFunction = RenderFunction<ElkSvgEdge>;
 
 export type Classnames = {
   topLevelGroup: string;
@@ -44,9 +51,12 @@ export type Classnames = {
 
   nodeGroup: string;
   nodeComponent: string;
+  nodeShape: string;
 
   edgeGroup: string;
   edgeComponent: string;
+  edgeLine: string;
+  edgeArrow: string;
 
   portGroup: string;
   portComponent: string;
@@ -71,7 +81,7 @@ export type ElkSvgElementOptions = {
 };
 
 export type ElkSvgNodeOptions = ElkSvgElementOptions & {
-  shape?: string;
+  shape?: string | null;
 
   /**
    * For rounded shapes.
@@ -79,7 +89,10 @@ export type ElkSvgNodeOptions = ElkSvgElementOptions & {
   radius?: number;
 };
 
-export type ElkSvgEdgeOptions = ElkSvgElementOptions & {};
+export type ElkSvgEdgeOptions = ElkSvgElementOptions & {
+  arrow?: string | null;
+  arrowSize?: number;
+};
 
 export type ElkSvgLabelOptions = ElkSvgElementOptions & {};
 

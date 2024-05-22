@@ -1,4 +1,11 @@
-import type { ElkSvgElement, Logger, NodeShapeFunction } from "../types";
+import type {
+  Attrnames,
+  Classnames,
+  EdgeArrowFunction,
+  ElkSvgElement,
+  Logger,
+  NodeShapeFunction,
+} from "../types";
 
 /**
  * Component is one-to-one mapping of ElkGraphElement to DOMElement.
@@ -22,5 +29,8 @@ export type Component<EE extends ElkSvgElement = ElkSvgElement> = {
 
 export type ComponentRenderContext = {
   nodeShapeFunctions: Record<string, NodeShapeFunction>;
+  edgeArrowFunctions: Record<string, EdgeArrowFunction>;
+  classnames: Classnames;
+  attrnames: Attrnames;
   logger: Logger;
 };

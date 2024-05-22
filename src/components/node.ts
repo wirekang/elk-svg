@@ -13,7 +13,7 @@ export const nodeComponent: Component<ElkSvgNode> = {
 
   render: (ctx, ee) => {
     const shape = ee.svg?.shape;
-    if (shape === undefined) {
+    if (!shape) {
       return null;
     }
     const f = ctx.nodeShapeFunctions[shape];
@@ -21,6 +21,8 @@ export const nodeComponent: Component<ElkSvgNode> = {
       ctx.logger.error(`no nodeShapeFunction for '${shape}'`);
       return null;
     }
-    return f(ee as any, ctx.logger);
+    const de = f(ctx, ee as any);
+    de.classList.add(ctx.classnames.nodeShape);
+    return de;
   },
 };

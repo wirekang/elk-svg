@@ -1,6 +1,7 @@
 import {
   defaultAttrnames,
   defaultClassnames,
+  defaultEdgeArrowFunctions,
   defaultLogger,
   defaultNodeShapeFunctions,
 } from "./defaults";
@@ -19,12 +20,14 @@ import type {
   ElkSvgOptions,
   Logger,
   NodeShapeFunction,
+  EdgeArrowFunction,
 } from "./types";
 import type { Component, ComponentRenderContext } from "./components/types";
 
 export class ElkSvg {
   private readonly logger: Logger;
   private readonly nodeShapeFunctions: Record<string, NodeShapeFunction>;
+  private readonly edgeArrowFunctions: Record<string, EdgeArrowFunction>;
   private readonly classnames: Classnames;
   private readonly attrnames: Attrnames;
   private readonly defaultOptions: Record<string, any>;
@@ -47,6 +50,10 @@ export class ElkSvg {
     this.nodeShapeFunctions = freezeMerge(
       defaultNodeShapeFunctions,
       options.nodeShapeFunctions,
+    );
+    this.edgeArrowFunctions = freezeMerge(
+      defaultEdgeArrowFunctions,
+      options.edgeArrowFunctions,
     );
     this.classnames = freezeMerge(defaultClassnames, options.classnames);
     this.attrnames = freezeMerge(defaultAttrnames, options.attrnames);
@@ -185,6 +192,9 @@ export class ElkSvg {
     const ctx: ComponentRenderContext = {
       logger: this.logger,
       nodeShapeFunctions: this.nodeShapeFunctions,
+      edgeArrowFunctions: this.edgeArrowFunctions,
+      attrnames: this.attrnames,
+      classnames: this.classnames,
     };
 
     if (!id) {
