@@ -143,17 +143,18 @@ export class ElkSvg {
   }
 
   private renderElkElement(component: Component, ee: ElkSvgElement) {
-    if (ee.id) {
-      this.renderContxt.groupRegistryForDeletion.delete(ee.id);
+    const ee2 = this.copyWithDefaultOptions(ee, component.name);
+    if (ee2.id) {
+      this.renderContxt.groupRegistryForDeletion.delete(ee2.id);
     }
-    const gde = this.renderGroup(ee);
+    const gde = this.renderGroup(ee2);
     const cn = component.name as "node" | "edge" | "port" | "label";
     gde.classList.add(this.classnames[`${cn}Group`]);
-    if (ee.id && this.idAttribute) {
-      gde.setAttribute(this.idAttribute, ee.id);
+    if (ee2.id && this.idAttribute) {
+      gde.setAttribute(this.idAttribute, ee2.id);
     }
-    transform(gde, { translate: ee as any });
-    const cde = this.renderComponent(component, ee, gde);
+    transform(gde, { translate: ee2 as any });
+    const cde = this.renderComponent(component, ee2, gde);
     if (cde) {
       cde.classList.add(this.classnames[`${cn}Component`]);
     }
@@ -195,7 +196,6 @@ export class ElkSvg {
     gde: Element,
   ): Element | null {
     const id = ee.id;
-    this.setDefaultOptions(ee, component.name);
 
     if (!component.validate(ee)) {
       this.logger.error(`validation failed: ${component.name}(${id})`);
@@ -230,12 +230,14 @@ export class ElkSvg {
         gde.appendChild(de);
         return de;
       case Check.unchanged:
-        return this.componentRegistry.get(id);
+        return this.componentRegistry.getOrNull(id);
     }
     throw new Error("unreachable");
   }
 
-  private setDefaultOptions(e: { svg?: any }, name: string) {
-    e.svg = freezeMerge(this.defaultOptions[name], e.svg);
+  private copyWithDefaultOptions<T extends { svg?: any }>(e: T, name: string): T {
+    const r = structuredClone(e);
+    r.svg = { ...this.defaultOptions[name], ...r.svg };
+    return r;
   }
 }

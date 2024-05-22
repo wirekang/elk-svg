@@ -12,12 +12,11 @@ async function go(node: ElkNode) {
   });
   const elk = new ELK();
   (window as any).node = node;
-  await elk.layout(node);
-  console.log(node);
-  elkSvg.render(structuredClone(node));
-  elkSvg.render(node);
+  const n = structuredClone(node);
+  await elk.layout(n);
+  elkSvg.render(n);
   setTimeout(() => {
-    elkSvg.render(structuredClone(node));
+    elkSvg.render(n);
   }, 1000);
 }
 
