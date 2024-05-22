@@ -72,8 +72,12 @@ export class ElkSvg {
     this.idAttribute = options.idAttribute ?? null;
   }
 
-  public getElement(id: string): SVGGElement | null {
+  public getGroupElement(id: string): SVGGElement | null {
     return this.groupRegistry.getOrNull(id) as any;
+  }
+
+  public getComponentElement(id: string): Element | null {
+    return this.componentRegistry.getOrNull(id) as any;
   }
 
   public render(rootNode: ElkSvgNode) {
