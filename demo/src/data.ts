@@ -6,6 +6,7 @@ export const exampleNodes: any = [
         id: "1",
         svg: {
           shape: "rect",
+          classes: ["foo"],
         },
         labels: [
           {

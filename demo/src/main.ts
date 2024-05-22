@@ -16,6 +16,7 @@ async function go(node: ElkNode) {
   await elk.layout(n);
   elkSvg.render(n);
   setTimeout(() => {
+    n.x = 200;
     elkSvg.render(n);
   }, 1000);
 }

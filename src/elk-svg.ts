@@ -147,22 +147,24 @@ export class ElkSvg {
     if (ee2.id) {
       this.renderContxt.groupRegistryForDeletion.delete(ee2.id);
     }
-    const gde = this.renderGroup(ee2);
+    const gde = this.renderGroup(ee2.id);
     const cn = component.name as "node" | "edge" | "port" | "label";
-    gde.classList.add(this.classnames[`${cn}Group`]);
+    gde.setAttribute(
+      "class",
+      [this.classnames[`${cn}Group`], ...(ee2.svg?.classes ?? [])].join(" "),
+    );
     if (ee2.id && this.idAttribute) {
       gde.setAttribute(this.idAttribute, ee2.id);
     }
     transform(gde, { translate: ee2 as any });
     const cde = this.renderComponent(component, ee2, gde);
     if (cde) {
-      cde.classList.add(this.classnames[`${cn}Component`]);
+      cde.setAttribute("class", this.classnames[`${cn}Component`]);
     }
     return gde;
   }
 
-  private renderGroup(ee: ElkSvgElement): SVGGElement {
-    const id = ee.id;
+  private renderGroup(id: string | undefined): SVGGElement {
     if (!id) {
       const de = svg("g");
       this.volatileElements.push(de);
@@ -172,6 +174,11 @@ export class ElkSvg {
 
     const existing = this.groupRegistry.getOrNull(id);
     if (existing !== null) {
+      if (this.renderContxt.parentId === null) {
+        // This node is root. No need to check parent changing.
+        return existing as any;
+      }
+
       const parentIdCheck = this.parentIdChecker.check(id, this.renderContxt.parentId);
       switch (parentIdCheck) {
         case Check.new:
