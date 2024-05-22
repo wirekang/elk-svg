@@ -71,7 +71,7 @@ const diamond: NodeShapeFunction = (node) => {
 };
 
 const roundRect: NodeShapeFunction = (node) => {
-  const r = node.svg?.radious ?? Math.min(node.width / 3, node.height / 3, 30);
+  const r = node.svg?.radius ?? Math.min(node.width / 3, node.height / 3, 30);
   const e = svg("rect");
   e.setAttribute("width", node.width!.toString());
   e.setAttribute("height", node.height!.toString());

@@ -76,7 +76,7 @@ export type ElkSvgNodeOptions = ElkSvgElementOptions & {
   /**
    * For rounded shapes.
    */
-  radious?: number;
+  radius?: number;
 };
 
 export type ElkSvgEdgeOptions = ElkSvgElementOptions & {};
