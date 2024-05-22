@@ -36,18 +36,7 @@ export class ElementRegistry {
     this.m.delete(id);
   }
 
-  public clone(name: string) {
-    return new ElementRegistry(name, this.m);
-  }
-
-  public deleteAll() {
-    this.m.forEach((e) => {
-      e.remove();
-    });
-    this.m.clear();
-  }
-
-  public size() {
-    return this.m.size;
+  public ids() {
+    return new Set(this.m.keys());
   }
 }

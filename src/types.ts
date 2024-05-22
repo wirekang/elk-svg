@@ -1,40 +1,35 @@
+import type { ComponentRenderContext } from "./components/types";
+
+/**
+ * Check out {@link https://github.com/wirekang/elk-svg/wiki | Wiki}.
+ */
 export type ElkSvgOptions = {
   /**
    * `svg` DOM Element.
    */
   container: Element;
 
-  /**
-   * to override default nodeShape or provide custom shape.
-   * @see {@link NodeShapeFunction}
-   */
   nodeShapeFunctions?: Record<string, NodeShapeFunction>;
+  edgeArrowFunctions?: Record<string, EdgeArrowFunction>;
 
-  /**
-   * to override default classes.
-   * @see {@link Classnames}
-   */
   classnames?: Classnames;
-
-  /**
-   * to override default attributes.
-   * @see {@link Attrnames}
-   */
-  attrnames?: Attrnames;
-
   logger?: Logger;
-
   defaultOptions?: {
     node?: ElkSvgNodeOptions;
     edge?: ElkSvgEdgeOptions;
     port?: ElkSvgPortOptions;
     label?: ElkSvgLabelOptions;
   };
+  idAttribute?: string;
 };
 
-export type NodeShapeFunction = (
-  node: ElkSvgNode & { width: number; height: number },
-) => Element;
+export type RenderFunction<T> = (ctx: ComponentRenderContext, ee: T) => Element;
+
+export type NodeShapeFunction = RenderFunction<
+  ElkSvgNode & { width: number; height: number }
+>;
+
+export type EdgeArrowFunction = RenderFunction<ElkSvgEdge>;
 
 export type Classnames = {
   topLevelGroup: string;
@@ -46,16 +41,14 @@ export type Classnames = {
 
   edgeGroup: string;
   edgeComponent: string;
+  edgeLine: string;
+  edgeArrow: string;
 
   portGroup: string;
   portComponent: string;
 
   labelGroup: string;
   labelComponent: string;
-};
-
-export type Attrnames = {
-  id: string;
 };
 
 export type Logger = {
@@ -70,10 +63,14 @@ export type ElkSvgElementOptions = {
 };
 
 export type ElkSvgNodeOptions = ElkSvgElementOptions & {
-  shape?: string;
+  shape?: string | null;
+  radius?: number;
 };
 
-export type ElkSvgEdgeOptions = ElkSvgElementOptions & {};
+export type ElkSvgEdgeOptions = ElkSvgElementOptions & {
+  arrow?: string | null;
+  arrowSize?: number;
+};
 
 export type ElkSvgLabelOptions = ElkSvgElementOptions & {};
 

@@ -3,16 +3,14 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "npm run clean && tsc",
-    "test": ""
+    "test": "",
+    "dev": "tsc --watch"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
   "exports": {
     ".": "./dist/index.js"
-  },
-  "jest": {
-    "transform": {}
   },
   "repository": {
     "type": "git",

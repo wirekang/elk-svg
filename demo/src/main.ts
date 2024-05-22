@@ -6,7 +6,10 @@ import { exampleNodes } from "./data";
 async function go(node: ElkNode) {
   const container = document.getElementById("container")!;
   container.innerHTML = "";
-  const elkSvg = new ElkSvg({ container, defaultOptions: { node: { shape: "rect" } } });
+  const elkSvg = new ElkSvg({
+    container,
+    defaultOptions: { node: { shape: "rect" }, edge: { arrow: "normal" } },
+  });
   const elk = new ELK();
   (window as any).node = node;
   await elk.layout(node);
