@@ -8,7 +8,6 @@ import type {
 
 export type Component<EE extends ElkSvgElement = ElkSvgElement> = {
   name: string;
-  append?: boolean;
   validate(ee: ElkSvgElement): boolean;
   key(ee: EE): string;
   render(ctx: ComponentRenderContext, ee: EE): Element | null;

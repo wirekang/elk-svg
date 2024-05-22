@@ -3,7 +3,6 @@ import { svg } from "../utils";
 import type { Component } from "./types";
 
 export const labelComponent: Component<ElkSvgLabel> = {
-  append: true,
   name: "label",
   validate: (ee: any) => {
     return true;

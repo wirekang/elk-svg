@@ -4,6 +4,21 @@ export const exampleNodes: any = [
     children: [
       {
         id: "1",
+        width: 50,
+        height: 50,
+      },
+      {
+        id: "2",
+        width: 50,
+        height: 50,
+      },
+    ],
+  },
+  {
+    id: "root",
+    children: [
+      {
+        id: "1",
         svg: {
           shape: "rect",
           classes: ["foo"],
