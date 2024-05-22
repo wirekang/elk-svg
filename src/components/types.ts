@@ -1,5 +1,4 @@
 import type {
-  Attrnames,
   Classnames,
   EdgeArrowFunction,
   ElkSvgElement,
@@ -18,6 +17,5 @@ export type ComponentRenderContext = {
   nodeShapeFunctions: Record<string, NodeShapeFunction>;
   edgeArrowFunctions: Record<string, EdgeArrowFunction>;
   classnames: Classnames;
-  attrnames: Attrnames;
   logger: Logger;
 };

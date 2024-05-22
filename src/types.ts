@@ -13,7 +13,6 @@ export type ElkSvgOptions = {
   edgeArrowFunctions?: Record<string, EdgeArrowFunction>;
 
   classnames?: Classnames;
-  attrnames?: Attrnames;
   logger?: Logger;
   defaultOptions?: {
     node?: ElkSvgNodeOptions;
@@ -21,6 +20,7 @@ export type ElkSvgOptions = {
     port?: ElkSvgPortOptions;
     label?: ElkSvgLabelOptions;
   };
+  idAttribute?: string;
 };
 
 export type RenderFunction<T> = (ctx: ComponentRenderContext, ee: T) => Element;
@@ -38,7 +38,6 @@ export type Classnames = {
 
   nodeGroup: string;
   nodeComponent: string;
-  nodeShape: string;
 
   edgeGroup: string;
   edgeComponent: string;
@@ -50,10 +49,6 @@ export type Classnames = {
 
   labelGroup: string;
   labelComponent: string;
-};
-
-export type Attrnames = {
-  id: string;
 };
 
 export type Logger = {

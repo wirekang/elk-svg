@@ -18,6 +18,7 @@ npm i elk-svg
 ```
 
 ```typescript
+import "./style.css" // See 'Styling' page in wiki.
 import { ElkSvg } from "elk-svg";
 
 const elk = new ELK();

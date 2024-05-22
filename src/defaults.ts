@@ -1,25 +1,24 @@
-import type { Attrnames, Classnames, Logger } from "./types";
+import type { Classnames, Logger } from "./types";
 import * as nodeShape from "./node-shape";
 import * as edgeArrow from "./edge-arrow";
 
 export const defaultClassnames: Classnames = {
   topLevelGroup: "elk-svg-top-level-group",
   group: "elk-svg-group",
+
   nodeGroup: "elk-svg-node-group",
-  nodeComponent: "elk-svg-node-shape",
-  nodeShape: "elk-svg-node-shape",
+  nodeComponent: "elk-svg-node-component",
+
   edgeGroup: "elk-svg-edge-group",
   edgeComponent: "elk-svg-edge-component",
   edgeLine: "elk-svg-edge-line",
   edgeArrow: "elk-svg-edge-arrow",
+
   portGroup: "elk-svg-port-group",
   portComponent: "elk-svg-port-component",
+
   labelGroup: "elk-svg-label-group",
   labelComponent: "elk-svg-label-component",
-};
-
-export const defaultAttrnames: Attrnames = {
-  id: "data-elk-svg-id",
 };
 
 export const defaultLogger: Logger = {

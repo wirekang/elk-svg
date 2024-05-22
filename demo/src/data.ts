@@ -1,6 +1,27 @@
 export const exampleNodes: any = [
   {
     id: "root",
+    layoutoptions: { algorithm: "layered" },
+    children: [
+      {
+        id: "n1",
+        width: 30,
+        height: 30,
+        children: [{ id: "n3", width: 30, height: 30 }],
+      },
+      { id: "n2", width: 30, height: 30 },
+    ],
+    edges: [
+      {
+        id: "e1_2",
+        sources: ["n1"],
+        targets: ["n2"],
+        labels: [{ id: "l1", text: "l1" }],
+      },
+    ],
+  },
+  {
+    id: "root",
     layoutOptions: {
       "elk.algorithm": "layered",
       "elk.direction": "RIGHT",

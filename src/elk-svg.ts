@@ -1,5 +1,4 @@
 import {
-  defaultAttrnames,
   defaultClassnames,
   defaultEdgeArrowFunctions,
   defaultLogger,
@@ -15,7 +14,6 @@ import { portComponent } from "./components/port";
 import type {
   ElkSvgElement,
   ElkSvgNode,
-  Attrnames,
   Classnames,
   ElkSvgOptions,
   Logger,
@@ -32,7 +30,6 @@ export class ElkSvg {
   private readonly nodeShapeFunctions: Record<string, NodeShapeFunction>;
   private readonly edgeArrowFunctions: Record<string, EdgeArrowFunction>;
   private readonly classnames: Classnames;
-  private readonly attrnames: Attrnames;
   private readonly defaultOptions: Record<string, any>;
 
   private readonly groupRegistry = new ElementRegistry("group");
@@ -49,6 +46,8 @@ export class ElkSvg {
     parentId: null as string | null,
   };
 
+  private readonly idAttribute: string | null;
+
   constructor(options: ElkSvgOptions) {
     this.nodeShapeFunctions = freezeMerge(
       defaultNodeShapeFunctions,
@@ -59,7 +58,6 @@ export class ElkSvg {
       options.edgeArrowFunctions,
     );
     this.classnames = freezeMerge(defaultClassnames, options.classnames);
-    this.attrnames = freezeMerge(defaultAttrnames, options.attrnames);
     this.logger = options.logger ?? defaultLogger;
     this.defaultOptions = Object.freeze({
       node: freezeMerge(options.defaultOptions?.node),
@@ -71,6 +69,7 @@ export class ElkSvg {
     this.topLevelGroup = svg("g");
     this.topLevelGroup.classList.add(this.classnames.topLevelGroup);
     options.container.appendChild(this.topLevelGroup);
+    this.idAttribute = options.idAttribute ?? null;
   }
 
   render(rootNode: ElkSvgNode) {
@@ -140,10 +139,10 @@ export class ElkSvg {
     const gde = this.renderGroup(ee);
     const cn = component.name as "node" | "edge" | "port" | "label";
     gde.classList.add(this.classnames[`${cn}Group`]);
-    transform(gde, { translate: ee as any });
-    if (ee.id) {
-      gde.setAttribute(this.attrnames.id, ee.id);
+    if (ee.id && this.idAttribute) {
+      gde.setAttribute(this.idAttribute, ee.id);
     }
+    transform(gde, { translate: ee as any });
     const cde = this.renderComponent(component, ee, gde);
     if (cde) {
       cde.classList.add(this.classnames[`${cn}Component`]);
@@ -196,7 +195,6 @@ export class ElkSvg {
       logger: this.logger,
       nodeShapeFunctions: this.nodeShapeFunctions,
       edgeArrowFunctions: this.edgeArrowFunctions,
-      attrnames: this.attrnames,
       classnames: this.classnames,
     };
 

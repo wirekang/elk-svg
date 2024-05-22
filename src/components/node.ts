@@ -22,7 +22,6 @@ export const nodeComponent: Component<ElkSvgNode> = {
       return null;
     }
     const de = f(ctx, ee as any);
-    de.classList.add(ctx.classnames.nodeShape);
     return de;
   },
 };

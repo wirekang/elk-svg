@@ -8,7 +8,7 @@ async function go(node: ElkNode) {
   container.innerHTML = "";
   const elkSvg = new ElkSvg({
     container,
-    defaultOptions: { node: { shape: "rect" }, edge: { arrow: "normal", line: "solid" } },
+    defaultOptions: { node: { shape: "rect" }, edge: { arrow: "normal" } },
   });
   const elk = new ELK();
   (window as any).node = node;
