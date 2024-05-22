@@ -1,6 +1,10 @@
-import { defaultAttrnames, defaultClassnames, defaultLogger } from "./defaults";
+import {
+  defaultAttrnames,
+  defaultClassnames,
+  defaultLogger,
+  defaultNodeShapeFunctions,
+} from "./defaults";
 import { ElementRegistry } from "./element-registry";
-import { NODE_SHAPE_FUNCTIONS } from "./node-shape";
 import { freezeMerge, svg, transform } from "./utils";
 import { Check, Checker } from "./checker";
 import { nodeComponent } from "./components/node";
@@ -41,7 +45,7 @@ export class ElkSvg {
 
   constructor(options: ElkSvgOptions) {
     this.nodeShapeFunctions = freezeMerge(
-      NODE_SHAPE_FUNCTIONS,
+      defaultNodeShapeFunctions,
       options.nodeShapeFunctions,
     );
     this.classnames = freezeMerge(defaultClassnames, options.classnames);

@@ -41,6 +41,9 @@ export const exampleNodes: any = [
             ],
             width: 129,
             height: 52,
+            svg: {
+              shape: "circle",
+            },
           },
           {
             id: "Test4",
@@ -57,6 +60,26 @@ export const exampleNodes: any = [
             ],
             width: 129,
             height: 52,
+            svg: {
+              shape: "ellipse",
+            },
+          },
+        ],
+        edges: [
+          {
+            id: "Test3/Test4",
+            labels: [
+              {
+                text: "Check",
+                layoutOptions: {
+                  "elk.edgeLabels.placement": "CENTER",
+                },
+                height: 22,
+                width: 49,
+              },
+            ],
+            sources: ["Test3"],
+            targets: ["Test4"],
           },
         ],
       },
@@ -91,6 +114,9 @@ export const exampleNodes: any = [
         ],
         width: 129,
         height: 52,
+        svg: {
+          shape: "round-rect",
+        },
       },
     ],
     edges: [
@@ -108,21 +134,6 @@ export const exampleNodes: any = [
         ],
         sources: ["Test1"],
         targets: ["Test2"],
-      },
-      {
-        id: "Test3/Test4",
-        labels: [
-          {
-            text: "Check",
-            layoutOptions: {
-              "elk.edgeLabels.placement": "CENTER",
-            },
-            height: 22,
-            width: 49,
-          },
-        ],
-        sources: ["Test3"],
-        targets: ["Test4"],
       },
     ],
   },

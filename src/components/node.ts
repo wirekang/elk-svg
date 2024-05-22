@@ -21,6 +21,6 @@ export const nodeComponent: Component<ElkSvgNode> = {
       ctx.logger.error(`no nodeShapeFunction for '${shape}'`);
       return null;
     }
-    return f(ee as any);
+    return f(ee as any, ctx.logger);
   },
 };

@@ -34,6 +34,7 @@ export type ElkSvgOptions = {
 
 export type NodeShapeFunction = (
   node: ElkSvgNode & { width: number; height: number },
+  logger: Logger,
 ) => Element;
 
 export type Classnames = {
@@ -71,6 +72,11 @@ export type ElkSvgElementOptions = {
 
 export type ElkSvgNodeOptions = ElkSvgElementOptions & {
   shape?: string;
+
+  /**
+   * For rounded shapes.
+   */
+  radious?: number;
 };
 
 export type ElkSvgEdgeOptions = ElkSvgElementOptions & {};
