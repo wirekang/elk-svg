@@ -12,9 +12,6 @@
   "exports": {
     ".": "./dist/index.js"
   },
-  "jest": {
-    "transform": {}
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wirekang/elk-svg.git"

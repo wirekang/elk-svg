@@ -24,6 +24,9 @@ import type {
 } from "./types";
 import type { Component, ComponentRenderContext } from "./components/types";
 
+/**
+ * Check out {@link https://github.com/wirekang/elk-svg/wiki | Wiki}.
+ */
 export class ElkSvg {
   private readonly logger: Logger;
   private readonly nodeShapeFunctions: Record<string, NodeShapeFunction>;

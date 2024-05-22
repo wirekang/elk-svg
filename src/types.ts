@@ -1,33 +1,20 @@
 import type { ComponentRenderContext } from "./components/types";
 
+/**
+ * Check out {@link https://github.com/wirekang/elk-svg/wiki | Wiki}.
+ */
 export type ElkSvgOptions = {
   /**
    * `svg` DOM Element.
    */
   container: Element;
 
-  /**
-   * to override default nodeShape or provide custom shape.
-   * @see {@link NodeShapeFunction}
-   */
   nodeShapeFunctions?: Record<string, NodeShapeFunction>;
-
   edgeArrowFunctions?: Record<string, EdgeArrowFunction>;
 
-  /**
-   * to override default classes.
-   * @see {@link Classnames}
-   */
   classnames?: Classnames;
-
-  /**
-   * to override default attributes.
-   * @see {@link Attrnames}
-   */
   attrnames?: Attrnames;
-
   logger?: Logger;
-
   defaultOptions?: {
     node?: ElkSvgNodeOptions;
     edge?: ElkSvgEdgeOptions;
@@ -82,10 +69,6 @@ export type ElkSvgElementOptions = {
 
 export type ElkSvgNodeOptions = ElkSvgElementOptions & {
   shape?: string | null;
-
-  /**
-   * For rounded shapes.
-   */
   radius?: number;
 };
 

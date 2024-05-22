@@ -54,6 +54,7 @@ export const edgeComponent: Component<ElkSvgEdge> = {
     return g;
   },
 };
+
 function getArrowFunction(ctx: any, ee: any): EdgeArrowFunction | null {
   const arrow = ee.svg?.arrow;
   if (!arrow) {
