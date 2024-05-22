@@ -81,6 +81,7 @@ export type Point = { x: number; y: number };
 export type ElkSvgElement = {
   id?: string;
   labels?: ElkSvgLabel[];
+  layoutOptions?: Record<string, any>;
 
   svg?: ElkSvgElementOptions;
 };

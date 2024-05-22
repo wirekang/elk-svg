@@ -11,8 +11,12 @@ export const exampleNodes: any = [
           {
             id: "label1",
             text: "1 Start",
+            width: 50,
+            height: 50,
           },
         ],
+        width: 50,
+        height: 50,
       },
       {
         id: "2",
@@ -23,8 +27,12 @@ export const exampleNodes: any = [
           {
             id: "label2",
             text: "2 Input password",
+            width: 50,
+            height: 50,
           },
         ],
+        width: 50,
+        height: 50,
       },
       {
         id: "3",
@@ -35,33 +43,45 @@ export const exampleNodes: any = [
           {
             id: "label3",
             text: "3 Create a pass_length variable that is equal to 0",
+            width: 50,
+            height: 50,
           },
         ],
+        width: 50,
+        height: 50,
       },
       {
         id: "4",
         svg: {
           shape: "rect",
-          classes: ["focus"],
         },
         labels: [
           {
             id: "label4",
             text: "4 Create a contains_number variable that is set to False",
+            width: 50,
+            height: 50,
           },
         ],
+        width: 50,
+        height: 50,
       },
       {
         id: "5",
         svg: {
           shape: "diamond",
+          classes: ["focus"],
         },
         labels: [
           {
             id: "label5",
             text: "5 Has the entire password been searched?",
+            width: 50,
+            height: 50,
           },
         ],
+        width: 50,
+        height: 50,
       },
       {
         id: "6",
@@ -72,8 +92,12 @@ export const exampleNodes: any = [
           {
             id: "label6",
             text: "6 Iterate to the next character in password",
+            width: 50,
+            height: 50,
           },
         ],
+        width: 50,
+        height: 50,
       },
       {
         id: "7",
@@ -84,8 +108,12 @@ export const exampleNodes: any = [
           {
             id: "label7",
             text: "7 Increase pass_length",
+            width: 50,
+            height: 50,
           },
         ],
+        width: 50,
+        height: 50,
       },
       {
         id: "8",
@@ -96,8 +124,12 @@ export const exampleNodes: any = [
           {
             id: "label8",
             text: "8 Is the current character a number?",
+            width: 50,
+            height: 50,
           },
         ],
+        width: 50,
+        height: 50,
       },
       {
         id: "9",
@@ -108,8 +140,12 @@ export const exampleNodes: any = [
           {
             id: "label9",
             text: "9 Set contains_number to True",
+            width: 50,
+            height: 50,
           },
         ],
+        width: 50,
+        height: 50,
       },
       {
         id: "10",
@@ -120,8 +156,12 @@ export const exampleNodes: any = [
           {
             id: "label10",
             text: "10 Is pass_length greater than 8 and is contain_number equal to True?",
+            width: 50,
+            height: 50,
           },
         ],
+        width: 50,
+        height: 50,
       },
       {
         id: "11",
@@ -132,8 +172,12 @@ export const exampleNodes: any = [
           {
             id: "label11",
             text: "11 Invalid password",
+            width: 50,
+            height: 50,
           },
         ],
+        width: 50,
+        height: 50,
       },
       {
         id: "12",
@@ -144,8 +188,12 @@ export const exampleNodes: any = [
           {
             id: "label12",
             text: "12 Valid password",
+            width: 50,
+            height: 50,
           },
         ],
+        width: 50,
+        height: 50,
       },
     ],
     edges: [
@@ -197,6 +245,8 @@ export const exampleNodes: any = [
           {
             id: "label24",
             text: "No",
+            width: 50,
+            height: 50,
           },
         ],
       },
@@ -239,6 +289,8 @@ export const exampleNodes: any = [
           {
             id: "label97",
             text: "Yes",
+            width: 50,
+            height: 50,
           },
         ],
       },
@@ -254,6 +306,8 @@ export const exampleNodes: any = [
           {
             id: "label28",
             text: "No",
+            width: 50,
+            height: 50,
           },
         ],
       },
@@ -269,6 +323,8 @@ export const exampleNodes: any = [
           {
             id: "label29",
             text: "Yes",
+            width: 50,
+            height: 50,
           },
         ],
       },
@@ -284,6 +340,8 @@ export const exampleNodes: any = [
           {
             id: "label90",
             text: "No",
+            width: 50,
+            height: 50,
           },
         ],
       },
@@ -299,11 +357,27 @@ export const exampleNodes: any = [
           {
             id: "label91",
             text: "Yes",
+            width: 50,
+            height: 50,
           },
         ],
       },
     ],
-    svg: {},
+    svg: {
+      shape: null,
+    },
+    layoutOptions: {
+      "elk.algorithm": "layered",
+      "elk.spacing.nodeNode": "80",
+      "elk.contentAlignment": "H_CENTER",
+      "elk.direction": "DOWN",
+      "elk.layered.spacing.nodeNodeBetweenLayers": "100",
+      "org.eclipse.elk.alignment": "CENTER",
+      "elk.edgeRouting": "ORTHOGONAL",
+      "org.eclipse.elk.edgeRouting": "ORTHOGONAL",
+      "elk.layered.spacing.edgeNodeBetweenLayers": "50",
+      "elk.layered.nodePlacement.bk.fixedAlignment": "BALANCED",
+    },
   },
   {
     id: "root",

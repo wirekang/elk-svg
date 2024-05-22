@@ -12,7 +12,7 @@ export const nodeComponent: Component<ElkSvgNode> = {
   },
 
   render: (ctx, ee) => {
-    const shape = ee.svg?.shape;
+    const shape = ee.svg!.shape;
     if (!shape) {
       return null;
     }
