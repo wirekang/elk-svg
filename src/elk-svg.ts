@@ -41,7 +41,7 @@ export class ElkSvg {
 
   private readonly topLevelGroup: Element;
   private readonly renderContxt = {
-    deletionEl: null as any as ElementRegistry,
+    groupRegistryForDeletion: "unreachable" as any as Set<string>,
     parent: null as any as Element,
     parentId: null as string | null,
   };
@@ -72,12 +72,16 @@ export class ElkSvg {
     this.idAttribute = options.idAttribute ?? null;
   }
 
-  render(rootNode: ElkSvgNode) {
+  public getElement(id: string): SVGGElement | null {
+    return this.groupRegistry.getOrNull(id) as any;
+  }
+
+  public render(rootNode: ElkSvgNode) {
     this.cleanVolatileElements();
 
     this.renderContxt.parent = this.topLevelGroup;
     this.renderContxt.parentId = null;
-    this.renderContxt.deletionEl = this.groupRegistry.clone("deletion");
+    this.renderContxt.groupRegistryForDeletion = this.groupRegistry.ids();
     const cb = (node: ElkSvgNode) => {
       const g = this.renderElkElement(nodeComponent, node);
 
@@ -128,13 +132,15 @@ export class ElkSvg {
   }
 
   private cleanDeletedElements() {
-    this.logger.debug("delete", this.renderContxt.deletionEl.size());
-    this.renderContxt.deletionEl.deleteAll();
+    this.logger.debug("delete", this.renderContxt.groupRegistryForDeletion.size);
+    this.renderContxt.groupRegistryForDeletion.forEach((id) => {
+      this.groupRegistry.delete(id);
+    });
   }
 
   private renderElkElement(component: Component, ee: ElkSvgElement) {
     if (ee.id) {
-      this.renderContxt.deletionEl.unset(ee.id);
+      this.renderContxt.groupRegistryForDeletion.delete(ee.id);
     }
     const gde = this.renderGroup(ee);
     const cn = component.name as "node" | "edge" | "port" | "label";
