@@ -14,7 +14,8 @@
     "noImplicitOverride": true,
     "skipLibCheck": true,
     "outDir": "dist",
-    "declaration": true
+    "declaration": true,
+    "sourceMap": true
   },
   "include": ["src"]
 }

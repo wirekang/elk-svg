@@ -1,398 +1,203 @@
 export const exampleNodes: any = [
   {
     id: "root",
+    layoutOptions: {
+      "elk.algorithm": "layered",
+      "elk.direction": "DOWN",
+      "elk.edgeRouting": "SPLINES",
+      "elk.layered.unnecessaryBendpoints": "true",
+      "elk.layered.spacing.edgeNodeBetweenLayers": "50",
+      "elk.layered.nodePlacement.bk.fixedAlignment": "BALANCED",
+      "elk.layered.cycleBreaking.strategy": "DEPTH_FIRST",
+      "elk.insideSelfLoops.activate": "true",
+      separateConnectedComponents: "false",
+      "spacing.componentComponent": "50",
+      spacing: "50",
+      "elk.layered.spacing.nodeNodeBetweenLayers": "50",
+      "elk.layered.crossingMinimization.forceNodeModelOrder": "true",
+      "elk.layered.crossingMinimization.semiInteractive": "true",
+    },
     children: [
       {
-        id: "1",
-        width: 50,
-        height: 50,
+        id: "n1",
+        width: 100,
+        height: 30,
+        labels: [{ text: "start" }],
+        layoutOptions: {
+          "portAlignment.default": "CENTER",
+          portConstraints: "FIXED_SIDE",
+        },
+        ports: [
+          {
+            id: "start_source",
+            properties: { "port.side": "SOUTH" },
+          },
+        ],
       },
       {
-        id: "2",
-        width: 50,
-        height: 50,
+        id: "n2",
+        width: 200,
+        height: 90,
+        labels: [{ text: "Condition" }],
+        layoutOptions: {
+          "portAlignment.default": "CENTER",
+          portConstraints: "FIXED_SIDE",
+        },
+        ports: [
+          {
+            id: "condition_target",
+            properties: { "port.side": "NORTH" },
+          },
+          {
+            id: "condition_yes_source",
+            labels: [{ text: "Yes" }],
+            layoutOptions: { "port.side": "SOUTH" },
+          },
+          {
+            id: "condition_no_source",
+            labels: [{ text: "No" }],
+            properties: { "port.side": "SOUTH" },
+          },
+        ],
+        svg: {
+          shape: "diamond",
+        },
       },
+      {
+        id: "n3",
+        width: 100,
+        height: 30,
+        labels: [{ text: "Yes Node" }],
+        layoutOptions: {
+          "portAlignment.default": "CENTER",
+          portConstraints: "FIXED_SIDE",
+        },
+        ports: [
+          {
+            id: "yes_n_source",
+            properties: { "port.side": "SOUTH" },
+          },
+          {
+            id: "yes_n_target",
+            properties: { "port.side": "NORTH" },
+          },
+        ],
+      },
+      {
+        id: "n4",
+        width: 100,
+        height: 30,
+        labels: [{ text: "No Node" }],
+        layoutOptions: {
+          "portAlignment.default": "CENTER",
+          portConstraints: "FIXED_SIDE",
+        },
+        ports: [
+          {
+            id: "no_n_source",
+            properties: { "port.side": "SOUTH" },
+          },
+          {
+            id: "no_n_target",
+            properties: { "port.side": "NORTH" },
+          },
+        ],
+      },
+      {
+        id: "n5",
+        width: 100,
+        height: 30,
+        labels: [{ text: "END" }],
+        layoutOptions: {
+          "portAlignment.default": "CENTER",
+          portConstraints: "FIXED_SIDE",
+        },
+        ports: [
+          {
+            id: "end_target",
+            properties: { "port.side": "NORTH" },
+          },
+        ],
+      },
+    ],
+    edges: [
+      { id: "e1", sources: ["start_source"], targets: ["condition_target"] },
+      { id: "e2", sources: ["condition_yes_source"], targets: ["yes_n_target"] },
+      { id: "e3", sources: ["yes_n_source"], targets: ["end_target"] },
+      { id: "e4", sources: ["condition_no_source"], targets: ["no_n_target"] },
+      { id: "e5", sources: ["no_n_source"], targets: ["end_target"] },
     ],
   },
   {
     id: "root",
+    layoutOptions: {
+      "elk.algorithm": "layered",
+      "elk.layered.spacing.nodeNodeBetweenLayers": "100",
+    },
     children: [
       {
         id: "1",
-        svg: {
-          shape: "rect",
-          classes: ["foo"],
-        },
-        labels: [
-          {
-            id: "label1",
-            text: "1 Start",
-            width: 50,
-            height: 50,
-          },
-        ],
-        width: 50,
-        height: 50,
+        width: 100,
+        height: 100,
       },
       {
         id: "2",
-        svg: {
-          shape: "rect",
-        },
-        labels: [
-          {
-            id: "label2",
-            text: "2 Input password",
-            width: 50,
-            height: 50,
-          },
-        ],
-        width: 50,
-        height: 50,
+        width: 100,
+        height: 100,
       },
       {
         id: "3",
+        width: 100,
+        height: 100,
         svg: {
-          shape: "rect",
+          shape: "diamond",
         },
-        labels: [
+        ports: [
           {
-            id: "label3",
-            text: "3 Create a pass_length variable that is equal to 0",
-            width: 50,
-            height: 50,
+            id: "3p1",
+            width: 5,
+            height: 5,
+          },
+          {
+            id: "3p2",
+            width: 5,
+            height: 5,
           },
         ],
-        width: 50,
-        height: 50,
       },
       {
         id: "4",
-        svg: {
-          shape: "rect",
-        },
-        labels: [
-          {
-            id: "label4",
-            text: "4 Create a contains_number variable that is set to False",
-            width: 50,
-            height: 50,
-          },
-        ],
-        width: 50,
-        height: 50,
-      },
-      {
-        id: "5",
-        svg: {
-          shape: "diamond",
-          classes: ["focus"],
-        },
-        labels: [
-          {
-            id: "label5",
-            text: "5 Has the entire password been searched?",
-            width: 50,
-            height: 50,
-          },
-        ],
-        width: 50,
-        height: 50,
-      },
-      {
-        id: "6",
-        svg: {
-          shape: "rect",
-        },
-        labels: [
-          {
-            id: "label6",
-            text: "6 Iterate to the next character in password",
-            width: 50,
-            height: 50,
-          },
-        ],
-        width: 50,
-        height: 50,
-      },
-      {
-        id: "7",
-        svg: {
-          shape: "rect",
-        },
-        labels: [
-          {
-            id: "label7",
-            text: "7 Increase pass_length",
-            width: 50,
-            height: 50,
-          },
-        ],
-        width: 50,
-        height: 50,
-      },
-      {
-        id: "8",
-        svg: {
-          shape: "diamond",
-        },
-        labels: [
-          {
-            id: "label8",
-            text: "8 Is the current character a number?",
-            width: 50,
-            height: 50,
-          },
-        ],
-        width: 50,
-        height: 50,
-      },
-      {
-        id: "9",
-        svg: {
-          shape: "rect",
-        },
-        labels: [
-          {
-            id: "label9",
-            text: "9 Set contains_number to True",
-            width: 50,
-            height: 50,
-          },
-        ],
-        width: 50,
-        height: 50,
-      },
-      {
-        id: "10",
-        svg: {
-          shape: "diamond",
-        },
-        labels: [
-          {
-            id: "label10",
-            text: "10 Is pass_length greater than 8 and is contain_number equal to True?",
-            width: 50,
-            height: 50,
-          },
-        ],
-        width: 50,
-        height: 50,
-      },
-      {
-        id: "11",
-        svg: {
-          shape: "rect",
-        },
-        labels: [
-          {
-            id: "label11",
-            text: "11 Invalid password",
-            width: 50,
-            height: 50,
-          },
-        ],
-        width: 50,
-        height: 50,
-      },
-      {
-        id: "12",
-        svg: {
-          shape: "rect",
-        },
-        labels: [
-          {
-            id: "label12",
-            text: "12 Valid password",
-            width: 50,
-            height: 50,
-          },
-        ],
-        width: 50,
-        height: 50,
+        width: 100,
+        height: 100,
       },
     ],
     edges: [
       {
-        id: "20",
+        id: "1-2",
         sources: ["1"],
         targets: ["2"],
-        svg: {
-          arrow: "normal",
-          arrowSize: 10,
-        },
       },
       {
-        id: "21",
-        sources: ["2"],
-        targets: ["3"],
-        svg: {
-          arrow: "normal",
-          arrowSize: 10,
-        },
+        id: "1-3",
+        sources: ["1"],
+        targets: ["3p2"],
       },
       {
-        id: "22",
-        sources: ["3"],
-        targets: ["4"],
-        svg: {
-          arrow: "normal",
-          arrowSize: 10,
-        },
-      },
-      {
-        id: "23",
+        id: "4-3",
         sources: ["4"],
-        targets: ["5"],
+        targets: ["3"],
+
         svg: {
-          arrow: "normal",
-          arrowSize: 10,
-        },
-      },
-      {
-        id: "24",
-        sources: ["5"],
-        targets: ["6"],
-        svg: {
-          arrow: "normal",
-          arrowSize: 10,
-        },
-        labels: [
-          {
-            id: "label24",
-            text: "No",
-            width: 50,
-            height: 50,
+          arrow: {
+            size: 30,
+            shape: "arrow-normal",
+            thickness: 1,
           },
-        ],
-      },
-      {
-        id: "25",
-        sources: ["6"],
-        targets: ["7"],
-        svg: {
-          arrow: "normal",
-          arrowSize: 10,
         },
-      },
-      {
-        id: "26",
-        sources: ["7"],
-        targets: ["8"],
-        svg: {
-          arrow: "normal",
-          arrowSize: 10,
-        },
-      },
-      {
-        id: "27",
-        sources: ["8"],
-        targets: ["9"],
-        svg: {
-          arrow: "normal",
-          arrowSize: 10,
-        },
-      },
-      {
-        id: "97",
-        sources: ["5"],
-        targets: ["10"],
-        svg: {
-          arrow: "normal",
-          arrowSize: 10,
-        },
-        labels: [
-          {
-            id: "label97",
-            text: "Yes",
-            width: 50,
-            height: 50,
-          },
-        ],
-      },
-      {
-        id: "28",
-        sources: ["8"],
-        targets: ["5"],
-        svg: {
-          arrow: "normal",
-          arrowSize: 10,
-        },
-        labels: [
-          {
-            id: "label28",
-            text: "No",
-            width: 50,
-            height: 50,
-          },
-        ],
-      },
-      {
-        id: "29",
-        sources: ["9"],
-        targets: ["5"],
-        svg: {
-          arrow: "normal",
-          arrowSize: 10,
-        },
-        labels: [
-          {
-            id: "label29",
-            text: "Yes",
-            width: 50,
-            height: 50,
-          },
-        ],
-      },
-      {
-        id: "90",
-        sources: ["10"],
-        targets: ["11"],
-        svg: {
-          arrow: "normal",
-          arrowSize: 10,
-        },
-        labels: [
-          {
-            id: "label90",
-            text: "No",
-            width: 50,
-            height: 50,
-          },
-        ],
-      },
-      {
-        id: "91",
-        sources: ["10"],
-        targets: ["12"],
-        svg: {
-          arrow: "normal",
-          arrowSize: 10,
-        },
-        labels: [
-          {
-            id: "label91",
-            text: "Yes",
-            width: 50,
-            height: 50,
-          },
-        ],
       },
     ],
     svg: {
       shape: null,
-    },
-    layoutOptions: {
-      "elk.algorithm": "layered",
-      "elk.spacing.nodeNode": "80",
-      "elk.contentAlignment": "H_CENTER",
-      "elk.direction": "DOWN",
-      "elk.layered.spacing.nodeNodeBetweenLayers": "100",
-      "org.eclipse.elk.alignment": "CENTER",
-      "elk.edgeRouting": "ORTHOGONAL",
-      "org.eclipse.elk.edgeRouting": "ORTHOGONAL",
-      "elk.layered.spacing.edgeNodeBetweenLayers": "50",
-      "elk.layered.nodePlacement.bk.fixedAlignment": "BALANCED",
     },
   },
   {
@@ -497,9 +302,6 @@ export const exampleNodes: any = [
             ],
             sources: ["Test3"],
             targets: ["Test4"],
-            svg: {
-              arrow: null,
-            },
           },
         ],
       },
@@ -535,7 +337,7 @@ export const exampleNodes: any = [
         width: 129,
         height: 52,
         svg: {
-          shape: "round-rect",
+          shape: "rect",
         },
       },
     ],

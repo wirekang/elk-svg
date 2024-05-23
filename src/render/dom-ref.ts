@@ -1,12 +1,7 @@
-export class ElementRegistry {
-  private readonly m: Map<string, Element>;
+export class DomRef {
+  private readonly m: Map<string, Element> = new Map();
 
-  constructor(
-    private readonly name: string,
-    m?: Map<string, Element>,
-  ) {
-    this.m = new Map(m);
-  }
+  constructor(private readonly name: string) {}
 
   public set(id: string, v: Element) {
     this.m.set(id, v);

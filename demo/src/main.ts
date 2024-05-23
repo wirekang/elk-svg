@@ -8,16 +8,24 @@ async function go(node: ElkNode) {
   container.innerHTML = "";
   const elkSvg = new ElkSvg({
     container,
-    defaultOptions: { node: { shape: "rect" }, edge: { arrow: "normal" } },
+    defaultRenderingOptions: {
+      node: { shape: "rect" },
+      edge: { arrow: { size: 10, shape: "arrow-normal", thickness: 1 } },
+      port: { shape: "diamond" },
+    },
+    idAttribute: "data-demo-id",
   });
   const elk = new ELK();
-  (window as any).node = node;
-  const n = structuredClone(node);
-  await elk.layout(n);
-  elkSvg.render(n);
+  (window as any).before = structuredClone(node);
+  (window as any).after = structuredClone(node);
+  await elk.layout(node);
+  elkSvg.render(node);
+
   setTimeout(() => {
-    n.x = 200;
-    elkSvg.render(n);
+    console.log("re-render", structuredClone(node));
+    node.x = 200;
+    node.y = 200;
+    elkSvg.render(node);
   }, 1000);
 }
 

@@ -8,16 +8,22 @@
   transition: all 0.5s ease;
 }
 
-.elk-svg-node-component {
+.elk-svg-node {
   fill: #eee;
   stroke: red;
 }
 
-.elk-svg-label-component {
+.elk-svg-port {
+  fill: none;
+  stroke: black;
+  stroke-width: 1px;
+}
+
+.elk-svg-label {
   dominant-baseline: hanging;
 }
 
-.elk-svg-edge-component {
+.elk-svg-edge {
   fill: none;
   stroke: black;
   stroke-width: 1px;
