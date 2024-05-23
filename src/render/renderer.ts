@@ -81,7 +81,7 @@ export class Renderer {
   }
 
   private keyChanged(component: Component<any>, ctx: RenderingContext<any>) {
-    const key = structuredClone(component.key(ctx));
+    const key = component.key(ctx);
     const previousKey = this.componentKeys.get(ctx.element.id);
     this.componentKeys.set(ctx.element.id, key);
     if (previousKey === undefined) {
