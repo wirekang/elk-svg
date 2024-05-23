@@ -15,11 +15,9 @@ export class Preprocessor {
   public start(node: ElkSvgStrictNode): FlatElements {
     const middlewares = [new AbsolutePosition(), new ShapePath(this.shapes)];
     const flatResult = new Flatter(this.dro).flat(node);
-    console.log(structuredClone(flatResult.all));
     middlewares.forEach((m) => {
       m.run(flatResult);
     });
-    console.log(structuredClone(flatResult.all));
     return flatResult;
   }
 }
