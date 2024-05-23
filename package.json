@@ -26,8 +26,5 @@
     "prettier": "^3.2.5",
     "semantic-release": "^23.0.2",
     "typescript": "^5.4.5"
-  },
-  "dependencies": {
-    "fast-deep-equal": "^3.1.3"
   }
 }

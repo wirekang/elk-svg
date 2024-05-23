@@ -1,8 +1,7 @@
-import equal from "fast-deep-equal";
 import type { FlatElement, FlatElementType, FlatElements } from "../flat-types";
 import type { Logger } from "../logger";
 import type { RenderingContext } from "./types";
-import { svg, transform } from "../utils";
+import { deepEqual, svg, transform } from "../utils";
 import { edgeComponent } from "./components/edge";
 import { labelComponent } from "./components/label";
 import { nodeComponent } from "./components/node";
@@ -88,7 +87,7 @@ export class Renderer {
     if (previousKey === undefined) {
       return true;
     }
-    return !equal(key, previousKey);
+    return !deepEqual(key, previousKey);
   }
 }
 
