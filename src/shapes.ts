@@ -1,4 +1,4 @@
-import type { Shape } from "../shape-types";
+import type { Shape } from "./types";
 
 const rect: Shape = ({ width: w, height: h }) => ({
   path: [["M", 0, 0], ["L", w, 0], ["L", w, h], ["L", 0, h], ["z"]],
@@ -13,9 +13,6 @@ const diamond: Shape = ({ width: w, height: h }) => ({
 });
 
 const arrowNormal: Shape = ({ width: w, height: h }) => ({
-  //   path: [["M", w / 2, h / 2], ["L", w, h], ["L", 0, h], ["z"]],
-  //   path: [["M", 0, h / 2], ["L", w / 2, 0], ["L", w, h / 2], ["z"]],
-  //   path: [["M", 0, h / 2], ["L", w / 2, 0], ["L", w, h / 2], ["L", w / 2, h], ["z"]],
   path: [["M", 0, h], ["L", w, h], ["L", w / 2, 0], ["z"]],
 });
 

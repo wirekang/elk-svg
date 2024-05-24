@@ -1,18 +1,10 @@
-import type { Point } from "./elk-types";
-import type { ShapeOutput } from "./shape-types";
+import type { Point, ShapeOutput } from "./types";
 
 export function ntos(v: number | undefined | null | false, suffix = "") {
   if (v === undefined || v === null || v === false) {
     return "0" + suffix;
   }
   return `${v}${suffix}`;
-}
-
-export function n(v: undefined | null | string | number): number {
-  if (!v) {
-    return 0;
-  }
-  return typeof v === "number" ? v : parseFloat(v);
 }
 
 export function svg<K extends keyof SVGElementTagNameMap>(name: K) {
@@ -60,22 +52,6 @@ export function transform(
     return;
   }
   e.setAttribute("transform", r.join(" "));
-}
-
-export function freezeMerge(...args: (object | null | undefined)[]) {
-  const r = {};
-  args.forEach((a) => {
-    Object.assign(r, a);
-  });
-  return Object.freeze(r) as any;
-}
-
-export function elkVector(v: string): [number, number] {
-  const arr = v.split(",");
-  if (arr.length !== 2) {
-    throw new Error(`invalid vector: ${v}`);
-  }
-  return arr.map(Number) as any;
 }
 
 export function mapPush<K, V>(m: Map<K, V[]>, k: K, v: V) {

@@ -1,9 +1,4 @@
-export type Logger = {
-  debug: (...args: any[]) => void;
-  info: (...args: any[]) => void;
-  warn: (...args: any[]) => void;
-  error: (...args: any[]) => void;
-};
+import type { Logger } from "./types";
 
 export const defaultLogger: Logger = {
   debug: (...args: any[]): void => {

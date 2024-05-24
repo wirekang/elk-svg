@@ -1,9 +1,4 @@
-import type {
-  ElkSvgStrictEdge,
-  ElkSvgStrictLabel,
-  ElkSvgStrictNode,
-  ElkSvgStrictPort,
-} from "./strict-types";
+import type { StrictEdge, StrictLabel, StrictNode, StrictPort } from "./types";
 
 export type Flatten<T extends { svg?: any }> = Omit<
   T,
@@ -11,12 +6,12 @@ export type Flatten<T extends { svg?: any }> = Omit<
 > &
   Required<Pick<T, "svg">> & { depth: number; parentId: string };
 
-export type FlatNode = Omit<Flatten<ElkSvgStrictNode>, "parentId"> & {
+export type FlatNode = Omit<Flatten<StrictNode>, "parentId"> & {
   parentId: string | null;
   shapePath?: string;
 };
 
-export type FlatEdge = Flatten<ElkSvgStrictEdge> & {
+export type FlatEdge = Flatten<StrictEdge> & {
   // Container's position
   x: number;
   y: number;
@@ -31,12 +26,12 @@ export type FlatEdge = Flatten<ElkSvgStrictEdge> & {
   linePath?: string;
 };
 
-export type FlatPort = Flatten<ElkSvgStrictPort> & {
+export type FlatPort = Flatten<StrictPort> & {
   shapePath?: string;
 };
 
-export type FlatLabel = Flatten<ElkSvgStrictLabel> & {
-  // Id is aut generated with parentId and index.
+export type FlatLabel = Flatten<StrictLabel> & {
+  // Id is auto generated with parentId and index.
   id: string;
 };
 

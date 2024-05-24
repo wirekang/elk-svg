@@ -1,7 +1,5 @@
 import type { FlatElements } from "../flat-types";
-import type { DefaultRenderingOptions } from "../rendering-types";
-import type { Shape } from "../shape-types";
-import type { ElkSvgStrictNode } from "../strict-types";
+import type { DefaultRenderingOptions, Shape, StrictNode } from "../types";
 import { Flatter } from "./flatter";
 import { AbsolutePosition } from "./middlewares/absolute-position";
 import { ShapePath } from "./middlewares/shape-path";
@@ -12,7 +10,7 @@ export class Preprocessor {
     private readonly shapes: Record<string, Shape>,
   ) {}
 
-  public start(node: ElkSvgStrictNode): FlatElements {
+  public start(node: StrictNode): FlatElements {
     const middlewares = [new AbsolutePosition(), new ShapePath(this.shapes)];
     const flatResult = new Flatter(this.dro).flat(node);
     middlewares.forEach((m) => {

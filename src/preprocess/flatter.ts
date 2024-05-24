@@ -1,11 +1,11 @@
-import type { LayoutedEdgeSection } from "../layouted-types";
-import type { DefaultRenderingOptions } from "../rendering-types";
 import type {
-  ElkSvgStrictEdge,
-  ElkSvgStrictLabel,
-  ElkSvgStrictNode,
-  ElkSvgStrictPort,
-} from "../strict-types";
+  DefaultRenderingOptions,
+  StrictEdge,
+  StrictEdgeSection,
+  StrictLabel,
+  StrictNode,
+  StrictPort,
+} from "../types";
 import type { FlatElementRef, FlatResult } from "./types";
 import type { FlatElement } from "../flat-types";
 import type { FlatLabel } from "../flat-types";
@@ -23,7 +23,7 @@ export class Flatter {
 
   constructor(private readonly dro: DefaultRenderingOptions) {}
 
-  public flat(node: ElkSvgStrictNode): FlatResult {
+  public flat(node: StrictNode): FlatResult {
     this.doNode(0, null, node);
     return {
       all: this.all,
@@ -35,7 +35,7 @@ export class Flatter {
     };
   }
 
-  private doNode(depth: number, parentId: string | null, node: ElkSvgStrictNode) {
+  private doNode(depth: number, parentId: string | null, node: StrictNode) {
     const flatNode = {
       svg: { ...this.dro.node, ...node.svg },
       x: node.x,
@@ -56,7 +56,7 @@ export class Flatter {
     node.labels?.forEach(this.doLabel.bind(this, depth + 1, node.id));
   }
 
-  private doEdge(depth: number, parentId: string, edge: ElkSvgStrictEdge) {
+  private doEdge(depth: number, parentId: string, edge: StrictEdge) {
     const flatEdge: FlatEdge = {
       svg: { ...this.dro.edge, ...edge.svg },
       id: edge.id,
@@ -75,7 +75,7 @@ export class Flatter {
     edge.labels?.forEach(this.doLabel.bind(this, depth + 1, edge.id));
   }
 
-  private doPort(depth: number, parentId: string, port: ElkSvgStrictPort) {
+  private doPort(depth: number, parentId: string, port: StrictPort) {
     const flatPort: FlatPort = {
       id: port.id,
       width: port.width,
@@ -92,12 +92,7 @@ export class Flatter {
     port.labels?.forEach(this.doLabel.bind(this, depth + 1, port.id));
   }
 
-  private doLabel(
-    depth: number,
-    parentId: string,
-    label: ElkSvgStrictLabel,
-    index: number,
-  ) {
+  private doLabel(depth: number, parentId: string, label: StrictLabel, index: number) {
     const flatLabel: FlatLabel = {
       id: label.id ?? `__label__${parentId}_${index}`,
       svg: { ...this.dro.label, ...label.svg },
@@ -117,7 +112,7 @@ export class Flatter {
   }
 }
 
-function copySection(v: LayoutedEdgeSection[]): LayoutedEdgeSection[] {
+function copySection(v: StrictEdgeSection[]): StrictEdgeSection[] {
   return v.map((v) => ({
     id: v.id,
     startPoint: structuredClone(v.startPoint),

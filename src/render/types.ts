@@ -1,7 +1,6 @@
 import type { Classnamer } from "../classnames";
 import type { FlatElementType, FlatElementTypeMap } from "../flat-types";
-import type { Logger } from "../logger";
-import type { Shape } from "../shape-types";
+import type { Logger, Shape } from "../types";
 
 export type Component<T extends FlatElementType> = {
   key(ctx: RenderingContext<T>): any[];

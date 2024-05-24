@@ -1,6 +1,5 @@
-import type { Point } from "../../elk-types";
 import type { FlatEdge, FlatNode, FlatPort } from "../../flat-types";
-import type { Shape } from "../../shape-types";
+import type { Point, Shape } from "../../types";
 import { distance, formatPath, pointsToPath, rtod, trw } from "../../utils";
 import type { FlatResult, Middleware } from "../types";
 

@@ -1,10 +1,9 @@
-import type { ElkSvgInputNode } from "./input-types";
-import { defaultLogger, type Logger } from "./logger";
+import { defaultLogger } from "./logger";
 import { Preprocessor } from "./preprocess";
 import { Renderer } from "./render";
-import type { DefaultRenderingOptions } from "./rendering-types";
-import { defaultShapes } from "./shape";
-import type { Shape } from "./shape-types";
+import { defaultShapes } from "./shapes";
+import type { InputNode } from "./types";
+import { ElkSvgOptions } from "./types";
 
 export class ElkSvg {
   private readonly renderer: Renderer;
@@ -29,24 +28,19 @@ export class ElkSvg {
     this.preprocessor = new Preprocessor(o.defaultRenderingOptions, o.shapes);
   }
 
-  public render(node: ElkSvgInputNode) {
+  public render(node: InputNode): void {
     const flatElements = this.preprocessor.start(node as any);
     this.renderer.render(flatElements);
   }
-}
 
-export type ElkSvgOptions = {
   /**
-   * `svg` DOM Element.
+   *
+   * @param id the id of elk element.
+   * @returns rendered DOM element or null.
    */
-  container: Element;
-
-  defaultRenderingOptions?: DefaultRenderingOptions;
-
-  classPrefix?: string;
-  logger?: Logger;
-  idAttribute?: string;
-  shapes?: Record<string, Shape>;
-};
+  public ref(id: string): Element | null {
+    return this.renderer.ref(id);
+  }
+}
 
 type Options = ElkSvgOptions & Required<Omit<ElkSvgOptions, "idAttribute">>;

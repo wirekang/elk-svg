@@ -1,16 +1,14 @@
+import type { Classnamer } from "../classnames";
 import type { FlatElement, FlatElementType, FlatElements } from "../flat-types";
-import type { Logger } from "../logger";
-import type { RenderingContext } from "./types";
+import type { Logger, Shape } from "../types";
 import { deepEqual, svg, transform } from "../utils";
 import { edgeComponent } from "./components/edge";
 import { labelComponent } from "./components/label";
 import { nodeComponent } from "./components/node";
 import { portComponent } from "./components/port";
 import { DepthGroup } from "./depth-group";
-import type { Component } from "./types";
-import type { Shape } from "../shape-types";
 import { DomRef } from "./dom-ref";
-import type { Classnamer } from "../classnames";
+import type { Component, RenderingContext } from "./types";
 
 export class Renderer {
   private readonly groups: Record<FlatElementType, DepthGroup>;
@@ -44,6 +42,10 @@ export class Renderer {
     deletedIds.forEach((id) => {
       this.domRef.delete(id);
     });
+  }
+
+  public ref(id: string) {
+    return this.domRef.getOrNull(id);
   }
 
   private renderElement(
