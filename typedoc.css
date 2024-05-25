@@ -36,3 +36,7 @@ ul.tsd-parameters {
 ul.tsd-signatures {
   padding-left: 1rem;
 }
+
+#tsd-search a.title {
+  max-width: 150px;
+}
