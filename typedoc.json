@@ -2,12 +2,13 @@
   "out": "./_site",
   "plugin": ["typedoc-material-theme"],
   "themeColor": "#cb9820",
-  "entryPoints": ["./src/index.ts"],
+  "entryPoints": ["./src/index.ts", "./src/docs/**.ts"],
   "visibilityFilters": {},
   "sort": ["source-order", "kind", "instance-first", "alphabetical"],
   "excludePrivate": true,
   "excludeProtected": true,
-  "titleLink": "https://github.com/wirekang/elk-svg",
+  "titleLink": "",
+  "navigationLinks": { "GitHub": "https://github.com/wirekang/elk-svg" },
   "navigation": {
     "includeCategories": true
   },

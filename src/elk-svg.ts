@@ -9,7 +9,6 @@ import { ElkSvgOptions } from "./types";
  *
  * @param options
  * @returns {@link ElkSvg} instance.
- * @category Basic Usage
  */
 export function initElkSvg(options: ElkSvgOptions): ElkSvg {
   return new ElkSvgImpl(options);
@@ -43,11 +42,6 @@ class ElkSvgImpl implements ElkSvg {
     this.renderer.render(flatElements);
   }
 
-  /**
-   *
-   * @param id the id of elk element.
-   * @returns rendered DOM element or null.
-   */
   public ref(id: string): Element | null {
     return this.renderer.ref(id);
   }
