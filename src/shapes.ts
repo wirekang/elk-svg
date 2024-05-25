@@ -1,6 +1,6 @@
 import type { Shape } from "./types";
 
-const rect: Shape = ({ width: w, height: h }) => ({
+const rectangle: Shape = ({ width: w, height: h }) => ({
   path: [["M", 0, 0], ["L", w, 0], ["L", w, h], ["L", 0, h], ["z"]],
 });
 
@@ -17,7 +17,7 @@ const arrowNormal: Shape = ({ width: w, height: h }) => ({
 });
 
 export const defaultShapes: Record<string, Shape> = {
-  rect,
+  rectangle,
   ellipse,
   diamond,
   "arrow-normal": arrowNormal,

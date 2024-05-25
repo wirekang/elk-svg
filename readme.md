@@ -2,6 +2,7 @@
 
 # [elk-svg](https://github.com/wirekang/elk-svg)
 
-## Getting Started
+* SVG renderer for [ELK json format](https://eclipse.dev/elk/documentation/tooldevelopers/graphdatastructure/jsonformat.html).
+* No server, no framework, zero-dependency.
 
-### WIP (It works well but it's not documented yet)
+## [Documentation](https://wirekang.github.io/elk-svg)

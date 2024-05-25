@@ -9,7 +9,7 @@ async function go(node: ElkNode) {
   const elkSvg = new ElkSvg({
     container,
     defaultRenderingOptions: {
-      node: { shape: "rect" },
+      node: { shape: "rectangle" },
       edge: { arrow: { size: 10, shape: "arrow-normal", thickness: 1 } },
       port: { shape: "diamond" },
     },

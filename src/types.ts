@@ -1,12 +1,14 @@
-export type Point = { x: number; y: number };
-
-export type Logger = {
-  debug: (...args: any[]) => void;
-  info: (...args: any[]) => void;
-  warn: (...args: any[]) => void;
-  error: (...args: any[]) => void;
+/**
+ * @category Basic Usage
+ */
+export type ElkSvg = {
+  render(node: InputNode): void;
+  ref(id: string): Element | null;
 };
 
+/**
+ * @category Basic Usage
+ */
 export type ElkSvgOptions = {
   /**
    * `svg` DOM Element.
@@ -45,14 +47,23 @@ export type ElkSvgOptions = {
   logger?: Logger;
 };
 
+/**
+ * @category Basic Usage
+ */
 export type RenderingOptions = {
   classes?: string[];
 };
 
+/**
+ * @category Basic Usage
+ */
 export type NodeRenderingOptions = RenderingOptions & {
   shape?: string | null;
 };
 
+/**
+ * @category Basic Usage
+ */
 export type EdgeRenderingOptions = RenderingOptions & {
   arrow?: {
     shape: string;
@@ -61,12 +72,21 @@ export type EdgeRenderingOptions = RenderingOptions & {
   } | null;
 };
 
+/**
+ * @category Basic Usage
+ */
 export type PortRenderingOptions = RenderingOptions & {
   shape?: string | null;
 };
 
+/**
+ * @category Basic Usage
+ */
 export type LabelRenderingOptions = RenderingOptions;
 
+/**
+ * @category Basic Usage
+ */
 export type DefaultRenderingOptions = {
   node?: Partial<NodeRenderingOptions>;
   edge?: Partial<EdgeRenderingOptions>;
@@ -123,17 +143,26 @@ export type StrictEdgeSection = StrictElement & {
   outgoingSections?: string[];
 };
 
+/**
+ * @category Basic Usage
+ */
 export type InputElement = {
   id?: string;
   labels?: InputLabel[];
   layoutOptions?: any;
 };
 
+/**
+ * @category Basic Usage
+ */
 export type InputLabel = InputShape & {
   text?: string;
   svg?: LabelRenderingOptions;
 };
 
+/**
+ * @category Basic Usage
+ */
 export type InputShape = InputElement & {
   x?: number;
   y?: number;
@@ -141,6 +170,9 @@ export type InputShape = InputElement & {
   height?: number;
 };
 
+/**
+ * @category Basic Usage
+ */
 export type InputNode = InputShape & {
   id: string;
   children?: InputNode[];
@@ -149,11 +181,17 @@ export type InputNode = InputShape & {
   svg?: NodeRenderingOptions;
 };
 
+/**
+ * @category Basic Usage
+ */
 export type InputPort = InputShape & {
   id: string;
   svg?: PortRenderingOptions;
 };
 
+/**
+ * @category Basic Usage
+ */
 export type InputEdge = InputElement & {
   id: string;
   junctionPoints?: Point[];
@@ -164,6 +202,9 @@ export type InputEdge = InputElement & {
   svg?: EdgeRenderingOptions;
 };
 
+/**
+ * @category Basic Usage
+ */
 export type InputSection = InputElement & {
   id: string;
   startPoint: Point;
@@ -180,4 +221,13 @@ export type Shape = (input: ShapeInput) => ShapeOutput;
 export type ShapeInput = { width: number; height: number };
 export type ShapeOutput = {
   path: [string, ...number[]][] | string;
+};
+
+export type Point = { x: number; y: number };
+
+export type Logger = {
+  debug(...args: any[]): void;
+  info(...args: any[]): void;
+  warn(...args: any[]): void;
+  error(...args: any[]): void;
 };

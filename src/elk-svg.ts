@@ -2,10 +2,20 @@ import { defaultLogger } from "./logger";
 import { Preprocessor } from "./preprocess";
 import { Renderer } from "./render";
 import { defaultShapes } from "./shapes";
-import type { InputNode } from "./types";
+import type { ElkSvg, InputNode } from "./types";
 import { ElkSvgOptions } from "./types";
 
-export class ElkSvg {
+/**
+ *
+ * @param options
+ * @returns {@link ElkSvg} instance.
+ * @category Basic Usage
+ */
+export function initElkSvg(options: ElkSvgOptions): ElkSvg {
+  return new ElkSvgImpl(options);
+}
+
+class ElkSvgImpl implements ElkSvg {
   private readonly renderer: Renderer;
   private readonly preprocessor: Preprocessor;
 

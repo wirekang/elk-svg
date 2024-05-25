@@ -1,0 +1,38 @@
+.tsd-breadcrumb {
+  margin-bottom: 0.5rem;
+}
+
+.ts-flagOptional {
+  display: none;
+}
+
+.tsd-page-title > h1 {
+  display: none;
+}
+
+.tsd-index-group {
+  display: none;
+}
+
+.tsd-type-declaration > h4 {
+  display: none;
+}
+
+li.tsd-parameter > h5 {
+  font-size: 1.2rem;
+  margin-top: 2.1rem;
+  margin-bottom: -0.05rem;
+}
+
+li.tsd-parameter > div {
+  padding-left: 1rem;
+}
+
+ul.tsd-parameters {
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+ul.tsd-signatures {
+  padding-left: 1rem;
+}

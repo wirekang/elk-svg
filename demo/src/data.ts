@@ -337,7 +337,7 @@ export const exampleNodes: any = [
         width: 129,
         height: 52,
         svg: {
-          shape: "rect",
+          shape: "rectangle",
         },
       },
     ],
