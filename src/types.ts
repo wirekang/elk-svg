@@ -113,8 +113,8 @@ export type StrictEdgeSection = StrictElement & {
   startPoint: Point;
   endPoint: Point;
   bendPoints?: Point[];
-  incomingShape?: string;
-  outgoingShape?: string;
+  incomingShape: string;
+  outgoingShape: string;
   incomingSections?: string[];
   outgoingSections?: string[];
 };
@@ -171,11 +171,55 @@ export type InputSection = InputElement & {
   outgoingSections?: string[];
 };
 
-export type Shape = (input: ShapeInput) => ShapeOutput;
+export type Shape = {
+  path: (size: { w: number; h: number }, p: PathWriter) => PathWriter;
+};
 
-export type ShapeInput = { width: number; height: number };
-export type ShapeOutput = {
-  path: [string, ...number[]][] | string;
+export type PathWriter = {
+  ____________________________________________________________________________(): PathWriter;
+  M(x: number, y: number): PathWriter;
+  m(dx: number, dy: number): PathWriter;
+  L(x: number, y: number): PathWriter;
+  l(dx: number, dy: number): PathWriter;
+  H(x: number): PathWriter;
+  h(dx: number): PathWriter;
+  V(y: number): PathWriter;
+  v(dy: number): PathWriter;
+  C(x1: number, y1: number, x2: number, y2: number, x: number, y: number): PathWriter;
+  c(
+    dx1: number,
+    dy1: number,
+    dx2: number,
+    dy2: number,
+    dx: number,
+    dy: number,
+  ): PathWriter;
+  S(x2: number, y2: number, x: number, y: number): PathWriter;
+  s(dx2: number, dy2: number, dx: number, dy: number): PathWriter;
+  Q(x1: number, y1: number, x: number, y: number): PathWriter;
+  q(dx1: number, dy1: number, dx: number, dy: number): PathWriter;
+  T(x: number, y: number): PathWriter;
+  t(dx: number, dy: number): PathWriter;
+  A(
+    rx: number,
+    ry: number,
+    angle: number,
+    largeArcFlag: 0 | 1,
+    sweepFlag: 0 | 1,
+    x: number,
+    y: number,
+  ): PathWriter;
+  a(
+    rx: number,
+    ry: number,
+    angle: number,
+    largeArcFlag: 0 | 1,
+    sweepFlag: 0 | 1,
+    dx: number,
+    dy: number,
+  ): PathWriter;
+  Z(): PathWriter;
+  z(): PathWriter;
 };
 
 export type Point = { x: number; y: number };

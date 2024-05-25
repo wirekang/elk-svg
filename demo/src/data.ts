@@ -1,6 +1,452 @@
 export const exampleNodes: any = [
   {
     id: "root",
+    children: [
+      {
+        id: "1",
+        svg: {
+          shape: "rectangle",
+          classes: ["choice"],
+        },
+        labels: [
+          {
+            id: "label1",
+            text: "1 Start",
+            width: 45.546875,
+            height: 21,
+          },
+        ],
+        width: 100,
+        height: 100,
+        layoutOptions: {
+          "nodeSize.minimum": "100,100",
+        },
+      },
+      {
+        id: "2",
+        svg: {
+          shape: "rectangle",
+        },
+        labels: [
+          {
+            id: "label2",
+            text: "2 Input password",
+            width: 121.640625,
+            height: 21,
+          },
+        ],
+        width: 121.640625,
+        height: 100,
+        layoutOptions: {
+          "nodeSize.minimum": "100,100",
+        },
+      },
+      {
+        id: "3",
+        svg: {
+          shape: "rectangle",
+        },
+        labels: [
+          {
+            id: "label3",
+            text: "3 Create a pass_length variable that is equal to 0",
+            width: 340.953125,
+            height: 21,
+          },
+        ],
+        width: 340.953125,
+        height: 100,
+        layoutOptions: {
+          "nodeSize.minimum": "100,100",
+        },
+      },
+      {
+        id: "4",
+        svg: {
+          shape: "rectangle",
+        },
+        labels: [
+          {
+            id: "label4",
+            text: "4 Create a contains_number variable that is set to False",
+            width: 386.5,
+            height: 21,
+          },
+        ],
+        width: 386.5,
+        height: 100,
+        layoutOptions: {
+          "nodeSize.minimum": "100,100",
+        },
+      },
+      {
+        id: "5",
+        svg: {
+          shape: "diamond",
+          classes: ["focus"],
+        },
+        labels: [
+          {
+            id: "label5",
+            text: "5 Has the entire password been searched?",
+            width: 297.21875,
+            height: 21,
+          },
+        ],
+        width: 297.21875,
+        height: 100,
+        layoutOptions: {
+          "nodeSize.minimum": "100,100",
+        },
+      },
+      {
+        id: "6",
+        svg: {
+          shape: "rectangle",
+        },
+        labels: [
+          {
+            id: "label6",
+            text: "6 Iterate to the next character in password",
+            width: 297.6875,
+            height: 21,
+          },
+        ],
+        width: 297.6875,
+        height: 100,
+        layoutOptions: {
+          "nodeSize.minimum": "100,100",
+        },
+      },
+      {
+        id: "7",
+        svg: {
+          shape: "rectangle",
+        },
+        labels: [
+          {
+            id: "label7",
+            text: "7 Increase pass_length",
+            width: 158.28125,
+            height: 21,
+          },
+        ],
+        width: 158.28125,
+        height: 100,
+        layoutOptions: {
+          "nodeSize.minimum": "100,100",
+        },
+      },
+      {
+        id: "8",
+        svg: {
+          shape: "diamond",
+        },
+        labels: [
+          {
+            id: "label8",
+            text: "8 Is the current character a number?",
+            width: 254.796875,
+            height: 21,
+          },
+        ],
+        width: 254.796875,
+        height: 100,
+        layoutOptions: {
+          "nodeSize.minimum": "100,100",
+        },
+      },
+      {
+        id: "9",
+        svg: {
+          shape: "rectangle",
+        },
+        labels: [
+          {
+            id: "label9",
+            text: "9 Set contains_number to True",
+            width: 214.1875,
+            height: 21,
+          },
+        ],
+        width: 214.1875,
+        height: 100,
+        layoutOptions: {
+          "nodeSize.minimum": "100,100",
+        },
+      },
+      {
+        id: "10",
+        svg: {
+          shape: "diamond",
+        },
+        labels: [
+          {
+            id: "label10",
+            text: "10 Is pass_length greater than 8 and is contain_number equal to True?",
+            width: 492.875,
+            height: 21,
+          },
+        ],
+        width: 492.875,
+        height: 100,
+        layoutOptions: {
+          "nodeSize.minimum": "100,100",
+        },
+      },
+      {
+        id: "11",
+        svg: {
+          shape: "rectangle",
+        },
+        labels: [
+          {
+            id: "label11",
+            text: "11 Invalid password",
+            width: 139.359375,
+            height: 21,
+          },
+        ],
+        width: 139.359375,
+        height: 100,
+        layoutOptions: {
+          "nodeSize.minimum": "100,100",
+        },
+      },
+      {
+        id: "12",
+        svg: {
+          shape: "rectangle",
+        },
+        labels: [
+          {
+            id: "label12",
+            text: "12 Valid password",
+            width: 127.140625,
+            height: 21,
+          },
+        ],
+        width: 127.140625,
+        height: 100,
+        layoutOptions: {
+          "nodeSize.minimum": "100,100",
+        },
+      },
+    ],
+    edges: [
+      {
+        id: "20",
+        sources: ["1"],
+        targets: ["2"],
+        svg: {
+          arrow: {
+            shape: "arrow-normal",
+            size: 10,
+            thickness: 1,
+          },
+        },
+      },
+      {
+        id: "21",
+        sources: ["2"],
+        targets: ["3"],
+        svg: {
+          arrow: {
+            shape: "arrow-normal",
+            size: 10,
+            thickness: 1,
+          },
+        },
+      },
+      {
+        id: "22",
+        sources: ["3"],
+        targets: ["4"],
+        svg: {
+          arrow: {
+            shape: "arrow-normal",
+            size: 10,
+            thickness: 1,
+          },
+        },
+      },
+      {
+        id: "23",
+        sources: ["4"],
+        targets: ["5"],
+        svg: {
+          arrow: {
+            shape: "arrow-normal",
+            size: 10,
+            thickness: 1,
+          },
+        },
+      },
+      {
+        id: "24",
+        sources: ["5"],
+        targets: ["6"],
+        svg: {
+          arrow: {
+            shape: "arrow-normal",
+            size: 10,
+            thickness: 1,
+          },
+        },
+        labels: [
+          {
+            id: "label24",
+            text: "No",
+            width: 21.34375,
+            height: 21,
+          },
+        ],
+      },
+      {
+        id: "25",
+        sources: ["6"],
+        targets: ["7"],
+        svg: {
+          arrow: {
+            shape: "arrow-normal",
+            size: 10,
+            thickness: 1,
+          },
+        },
+      },
+      {
+        id: "26",
+        sources: ["7"],
+        targets: ["8"],
+        svg: {
+          arrow: {
+            shape: "arrow-normal",
+            size: 10,
+            thickness: 1,
+          },
+        },
+      },
+      {
+        id: "27",
+        sources: ["8"],
+        targets: ["9"],
+        svg: {
+          arrow: {
+            shape: "arrow-normal",
+            size: 10,
+            thickness: 1,
+          },
+        },
+      },
+      {
+        id: "97",
+        sources: ["5"],
+        targets: ["10"],
+        svg: {
+          arrow: {
+            shape: "arrow-normal",
+            size: 10,
+            thickness: 1,
+          },
+        },
+        labels: [
+          {
+            id: "label97",
+            text: "Yes",
+            width: 22.59375,
+            height: 21,
+          },
+        ],
+      },
+      {
+        id: "28",
+        sources: ["8"],
+        targets: ["5"],
+        svg: {
+          arrow: {
+            shape: "arrow-normal",
+            size: 10,
+            thickness: 1,
+          },
+        },
+        labels: [
+          {
+            id: "label28",
+            text: "No",
+            width: 21.34375,
+            height: 21,
+          },
+        ],
+      },
+      {
+        id: "29",
+        sources: ["9"],
+        targets: ["5"],
+        svg: {
+          arrow: {
+            shape: "arrow-normal",
+            size: 10,
+            thickness: 1,
+          },
+        },
+        labels: [
+          {
+            id: "label29",
+            text: "Yes",
+            width: 22.59375,
+            height: 21,
+          },
+        ],
+      },
+      {
+        id: "90",
+        sources: ["10"],
+        targets: ["11"],
+        svg: {
+          arrow: {
+            shape: "arrow-normal",
+            size: 10,
+            thickness: 1,
+          },
+        },
+        labels: [
+          {
+            id: "label90",
+            text: "No",
+            width: 21.34375,
+            height: 21,
+          },
+        ],
+      },
+      {
+        id: "91",
+        sources: ["10"],
+        targets: ["12"],
+        svg: {
+          arrow: {
+            shape: "arrow-normal",
+            size: 10,
+            thickness: 1,
+          },
+        },
+        labels: [
+          {
+            id: "label91",
+            text: "Yes",
+            width: 22.59375,
+            height: 21,
+          },
+        ],
+      },
+    ],
+    svg: {},
+    layoutOptions: {
+      "elk.direction": "DOWN",
+      "elk.layered.crossingMinimization.strategy": "INTERACTIVE",
+    },
+  },
+  {
+    id: "root",
     layoutOptions: {
       "elk.algorithm": "layered",
       "elk.direction": "DOWN",
@@ -16,6 +462,9 @@ export const exampleNodes: any = [
       "elk.layered.spacing.nodeNodeBetweenLayers": "50",
       "elk.layered.crossingMinimization.forceNodeModelOrder": "true",
       "elk.layered.crossingMinimization.semiInteractive": "true",
+    },
+    svg: {
+      shape: null,
     },
     children: [
       {
@@ -61,6 +510,14 @@ export const exampleNodes: any = [
         ],
         svg: {
           shape: "diamond",
+        },
+      },
+      {
+        id: "nnn1",
+        width: 200,
+        height: 50,
+        svg: {
+          shape: "ellipse",
         },
       },
       {
@@ -337,7 +794,7 @@ export const exampleNodes: any = [
         width: 129,
         height: 52,
         svg: {
-          shape: "rectangle",
+          shape: "ellipse",
         },
       },
     ],

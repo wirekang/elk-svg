@@ -1,4 +1,4 @@
-import type { Point, ShapeOutput } from "./types";
+import type { Point } from "./types";
 
 export function ntos(v: number | undefined | null | false, suffix = "") {
   if (v === undefined || v === null || v === false) {
@@ -67,24 +67,6 @@ export type Brand<K, T> = T & { __not_in_runtime: K };
 
 export function trw(t: any, message: string, record?: any, cause?: any): never {
   throw new t(`${message}:\n${JSON.stringify(record, null, 2)}\n`, { cause });
-}
-
-export function formatPath({ path }: ShapeOutput) {
-  if (typeof path === "string") {
-    return path;
-  }
-
-  let result = "";
-  for (const line of path) {
-    result += " " + line[0] + " ";
-    for (let i = 1; i < line.length; i += 1) {
-      if (i !== 1) {
-        result += ",";
-      }
-      result += line[i];
-    }
-  }
-  return result.substring(1);
 }
 
 export function rtod(r: number) {

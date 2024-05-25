@@ -1,12 +1,12 @@
+import { initElkSvg } from "elk-svg";
 import ELK, { type ElkNode } from "elkjs";
-import "./style.css";
-import { ElkSvg } from "elk-svg";
 import { exampleNodes } from "./data";
+import "./style.css";
 
 async function go(node: ElkNode) {
   const container = document.getElementById("container")!;
   container.innerHTML = "";
-  const elkSvg = new ElkSvg({
+  const elkSvg = initElkSvg({
     container,
     defaultRenderingOptions: {
       node: { shape: "rectangle" },
@@ -19,12 +19,15 @@ async function go(node: ElkNode) {
   (window as any).before = structuredClone(node);
   (window as any).after = structuredClone(node);
   await elk.layout(node);
+  node.x! += 20;
+  node.y! += 20;
   elkSvg.render(node);
 
   setTimeout(() => {
     console.log("re-render", structuredClone(node));
-    node.x = 200;
-    node.y = 200;
+
+    node.x! += 20;
+    node.y! += 20;
     elkSvg.render(node);
   }, 1000);
 }

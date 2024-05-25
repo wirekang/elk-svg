@@ -1,10 +1,14 @@
-import type { FlatEdge, FlatNode, FlatPort } from "../../flat-types";
 import type { Point, Shape } from "../../types";
-import { distance, formatPath, pointsToPath, rtod, trw } from "../../utils";
-import type { FlatResult, Middleware } from "../types";
+import { distance, pointsToPath, rtod, trw } from "../../utils";
+import type { PathWriterImpl } from "../path-writer";
+import type { FlatEdge, FlatNode, FlatPort, FlatResult, Middleware } from "../types";
+import { getShape } from "./utils";
 
-export class ShapePath implements Middleware {
-  constructor(private readonly shapes: Record<string, Shape>) {}
+export class GenPath implements Middleware {
+  constructor(
+    private readonly shapes: Record<string, Shape>,
+    private readonly pw: PathWriterImpl,
+  ) {}
 
   public run(f: FlatResult) {
     for (const node of f.nodes) {
@@ -19,15 +23,12 @@ export class ShapePath implements Middleware {
   }
 
   private box(element: FlatNode | FlatPort) {
-    if (!element.svg.shape) {
+    const shape = getShape(element.svg.shape, this.shapes);
+    if (!shape) {
       return;
     }
-    const shape = this.shapes[element.svg.shape];
-    if (!shape) {
-      trw(Error, "invalid shape", { element });
-    }
-    const output = shape({ width: element.width, height: element.height });
-    element.shapePath = formatPath(output);
+    shape.path({ w: element.width, h: element.height }, this.pw);
+    element.shapePath = this.pw.flush();
   }
 
   private edge(element: FlatEdge) {
@@ -52,15 +53,12 @@ export class ShapePath implements Middleware {
     const arrow = element.svg.arrow;
     if (arrow) {
       const lastPoint = element.sections[element.sections.length - 1].endPoint;
-      const shape = this.shapes[arrow.shape];
+      const shape = getShape(element.svg.arrow?.shape, this.shapes);
       if (!shape) {
         trw(Error, "invalid arrowShape", { element });
       }
 
-      const output = shape({
-        width: arrow.size,
-        height: arrow.size,
-      });
+      shape.path({ w: arrow.size, h: arrow.size }, this.pw);
 
       const arrowCenter = distance(
         lastPoint,
@@ -74,7 +72,7 @@ export class ShapePath implements Middleware {
         x: arrowCenter.x - arrow.size / 2,
         y: arrowCenter.y - arrow.size / 2,
         angle: rtod(pathRadian) + 90,
-        path: formatPath(output),
+        path: this.pw.flush(),
       };
       element.linePath = pointsToPath(points);
     }

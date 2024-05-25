@@ -1,5 +1,5 @@
 import type { Classnamer } from "../classnames";
-import type { FlatElement, FlatElementType, FlatElements } from "../flat-types";
+import type { RenderElement, RenderElementType, RenderElements } from "../render-types";
 import type { Logger, Shape } from "../types";
 import { deepEqual, svg, transform } from "../utils";
 import { edgeComponent } from "./components/edge";
@@ -11,7 +11,7 @@ import { DomRef } from "./dom-ref";
 import type { Component, RenderingContext } from "./types";
 
 export class Renderer {
-  private readonly groups: Record<FlatElementType, DepthGroup>;
+  private readonly groups: Record<RenderElementType, DepthGroup>;
   private readonly components = {
     node: nodeComponent,
     port: portComponent,
@@ -19,7 +19,7 @@ export class Renderer {
     label: labelComponent,
   };
   private readonly componentKeys = new Map<string, any>();
-  private readonly domRef = new DomRef("flat");
+  private readonly domRef = new DomRef("domRef");
 
   constructor(private readonly o: RendererOptions) {
     const topLevelGroup = svg("g");
@@ -33,12 +33,12 @@ export class Renderer {
     };
   }
 
-  public render(flatElements: FlatElements) {
+  public render(renderElements: RenderElements) {
     const deletedIds = this.domRef.ids();
-    flatElements.nodes.forEach(this.renderElement.bind(this, "node", deletedIds));
-    flatElements.ports.forEach(this.renderElement.bind(this, "port", deletedIds));
-    flatElements.edges.forEach(this.renderElement.bind(this, "edge", deletedIds));
-    flatElements.labels.forEach(this.renderElement.bind(this, "label", deletedIds));
+    renderElements.nodes.forEach(this.renderElement.bind(this, "node", deletedIds));
+    renderElements.ports.forEach(this.renderElement.bind(this, "port", deletedIds));
+    renderElements.edges.forEach(this.renderElement.bind(this, "edge", deletedIds));
+    renderElements.labels.forEach(this.renderElement.bind(this, "label", deletedIds));
     deletedIds.forEach((id) => {
       this.domRef.delete(id);
     });
@@ -49,9 +49,9 @@ export class Renderer {
   }
 
   private renderElement(
-    type: FlatElementType,
+    type: RenderElementType,
     idMarking: Set<string>,
-    element: FlatElement,
+    element: RenderElement,
   ) {
     idMarking.delete(element.id);
     const group = this.groups[type].get(element.depth);
@@ -73,13 +73,22 @@ export class Renderer {
     group.append(domElement);
   }
 
-  private domStateless(type: FlatElementType, element: FlatElement, domElement: Element) {
-    const classes = element.svg.classes ?? [];
-    domElement.setAttribute("class", [this.o.classnamer(type), ...classes].join(" "));
+  private domStateless(
+    type: RenderElementType,
+    element: RenderElement,
+    domElement: Element,
+  ) {
+    domElement.setAttribute(
+      "class",
+      [this.o.classnamer(type), ...element.classes].join(" "),
+    );
     if (this.o.idAttribute) {
       domElement.setAttribute(this.o.idAttribute, element.id);
     }
-    transform(domElement, { translate: element });
+    const e = element as any;
+    if (e.x || e.y) {
+      transform(domElement, { translate: e });
+    }
   }
 
   private keyChanged(component: Component<any>, ctx: RenderingContext<any>) {

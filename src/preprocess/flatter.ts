@@ -6,12 +6,16 @@ import type {
   StrictNode,
   StrictPort,
 } from "../types";
-import type { FlatElementRef, FlatResult } from "./types";
-import type { FlatElement } from "../flat-types";
-import type { FlatLabel } from "../flat-types";
-import type { FlatPort } from "../flat-types";
-import type { FlatEdge } from "../flat-types";
-import type { FlatNode } from "../flat-types";
+
+import type {
+  FlatEdge,
+  FlatElement,
+  FlatElementRef,
+  FlatLabel,
+  FlatNode,
+  FlatPort,
+  FlatResult,
+} from "./types";
 
 export class Flatter {
   private readonly ref: Map<string, FlatElementRef> = new Map();
@@ -36,7 +40,7 @@ export class Flatter {
   }
 
   private doNode(depth: number, parentId: string | null, node: StrictNode) {
-    const flatNode = {
+    const flatNode: FlatNode = {
       svg: { ...this.dro.node, ...node.svg },
       x: node.x,
       y: node.y,
@@ -45,7 +49,7 @@ export class Flatter {
       id: node.id,
       depth,
       parentId,
-      _shapePath: null,
+      classes: node.svg?.classes ?? [],
     };
     this.all.push(flatNode);
     this.nodes.push(flatNode);
@@ -66,8 +70,7 @@ export class Flatter {
       targets: [...edge.targets],
       depth,
       parentId,
-      x: 0,
-      y: 0,
+      classes: edge.svg?.classes ?? [],
     };
     this.all.push(flatEdge);
     this.edges.push(flatEdge);
@@ -85,6 +88,7 @@ export class Flatter {
       y: port.y,
       depth,
       parentId,
+      classes: port.svg?.classes ?? [],
     };
     this.ports.push(flatPort);
     this.all.push(flatPort);
@@ -103,6 +107,7 @@ export class Flatter {
       y: label.y,
       width: label.width,
       height: label.height,
+      classes: label.svg?.classes ?? [],
     };
     this.labels.push(flatLabel);
     this.all.push(flatLabel);

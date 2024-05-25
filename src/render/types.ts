@@ -1,15 +1,15 @@
 import type { Classnamer } from "../classnames";
-import type { FlatElementType, FlatElementTypeMap } from "../flat-types";
+import type { RenderElementType, RenderElementTypeMap } from "../render-types";
 import type { Logger, Shape } from "../types";
 
-export type Component<T extends FlatElementType> = {
+export type Component<T extends RenderElementType> = {
   key(ctx: RenderingContext<T>): any[];
   render(ctx: RenderingContext<T>): SVGElement;
 };
 
-export type RenderingContext<T extends FlatElementType> = {
+export type RenderingContext<T extends RenderElementType> = {
   logger: Logger;
-  element: FlatElementTypeMap[T];
+  element: RenderElementTypeMap[T];
   classnamer: Classnamer;
   shapes: Record<string, Shape>;
 };

@@ -1,18 +1,22 @@
-import { FlatNode } from "../flat-types";
-import { FlatElement } from "../flat-types";
-import { FlatPort } from "../flat-types";
-import { FlatLabel } from "../flat-types";
-import { FlatEdge } from "../flat-types";
+import { RenderEdge, RenderLabel, RenderNode, RenderPort } from "../render-types";
+import type {
+  EdgeRenderingOptions,
+  LabelRenderingOptions,
+  NodeRenderingOptions,
+  PortRenderingOptions,
+} from "../types";
+
+export type FlatNode = RenderNode & { svg: NodeRenderingOptions };
+export type FlatPort = RenderPort & { svg: PortRenderingOptions };
+export type FlatEdge = RenderEdge & { svg: EdgeRenderingOptions };
+export type FlatLabel = RenderLabel & { svg: LabelRenderingOptions };
+export type FlatElement = FlatNode | FlatPort | FlatEdge | FlatLabel;
 
 export type FlatElementRef =
   | { type: "node"; r: FlatNode }
   | { type: "edge"; r: FlatEdge }
   | { type: "port"; r: FlatPort }
   | { type: "label"; r: FlatLabel };
-
-export interface Middleware {
-  run: (f: FlatResult) => void;
-}
 
 export type FlatResult = {
   nodes: FlatNode[];
@@ -22,3 +26,7 @@ export type FlatResult = {
   all: FlatElement[];
   ref: Map<string, FlatElementRef>;
 };
+
+export interface Middleware {
+  run: (f: FlatResult) => void;
+}
